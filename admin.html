@@ -1123,21 +1123,27 @@
             <!-- Backup & Restore -->
             <div class="admin-card">
               <div class="card-title-row">
-                <div class="card-title"><i class="fas fa-database"></i> Backup & Pemulihan Konfigurasi (JSON)</div>
+                <div class="card-title"><i class="fas fa-database"></i> Sinkronisasi & Pemulihan Data (JSON)</div>
               </div>
               <p style="font-size:13px; color:#bbb; margin-bottom:14px;">
-                Seluruh pengaturan tema, foto, teks, dan database tamu dapat dicadangkan ke berkas JSON untuk disimpan atau dipindahkan ke komputer lain.
+                Semua pengaturan yang Anda simpan langsung tersinkronisasi ke tampilan tamu. Anda juga dapat mengunduh berkas <code>data.json</code> untuk publikasi permanen atau mencadangkannya.
               </p>
-              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-                <button type="button" class="admin-btn btn-primary" id="btn-export-json">
-                  <i class="fas fa-download"></i> Unduh File Backup (JSON)
+              <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <button type="button" class="admin-btn btn-primary" id="btn-export-data-json" title="Unduh data.json siap pakai di root proyek">
+                  <i class="fas fa-file-code"></i> Unduh data.json (Publikasi)
+                </button>
+                <button type="button" class="admin-btn btn-secondary" id="btn-copy-json" title="Salin data JSON lengkap">
+                  <i class="fas fa-copy"></i> Salin JSON
+                </button>
+                <button type="button" class="admin-btn btn-secondary" id="btn-export-json">
+                  <i class="fas fa-download"></i> Backup Lengkap
                 </button>
                 <label class="admin-btn btn-secondary" style="cursor:pointer; margin-bottom:0;">
-                  <i class="fas fa-upload"></i> Pulihkan dari File JSON
+                  <i class="fas fa-upload"></i> Pulihkan JSON
                   <input type="file" id="file-import-json" accept=".json" style="display:none;">
                 </label>
                 <button type="button" class="admin-btn btn-danger" id="btn-reset-default">
-                  <i class="fas fa-history"></i> Reset ke Pengaturan Awal
+                  <i class="fas fa-history"></i> Reset Default
                 </button>
               </div>
             </div>

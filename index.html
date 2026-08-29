@@ -1265,18 +1265,24 @@
 
           <div class="admin-card">
             <div class="card-title-row">
-              <div class="card-title"><i class="fas fa-database"></i> Backup & Restore JSON</div>
+              <div class="card-title"><i class="fas fa-database"></i> Sinkronisasi & Backup Data</div>
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="admin-btn btn-primary btn-sm" id="btn-export-json">
-                <i class="fas fa-download"></i> Unduh JSON
+              <button type="button" class="admin-btn btn-primary btn-sm" id="btn-export-data-json" title="Unduh data.json">
+                <i class="fas fa-file-code"></i> Unduh data.json
+              </button>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-copy-json" title="Salin JSON">
+                <i class="fas fa-copy"></i> Salin JSON
+              </button>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-export-json">
+                <i class="fas fa-download"></i> Backup JSON
               </button>
               <label class="admin-btn btn-secondary btn-sm" style="cursor:pointer; margin-bottom:0;">
                 <i class="fas fa-upload"></i> Pulihkan JSON
                 <input type="file" id="file-import-json" accept=".json" style="display:none;">
               </label>
               <button type="button" class="admin-btn btn-danger btn-sm" id="btn-reset-default">
-                <i class="fas fa-history"></i> Reset Default
+                <i class="fas fa-history"></i> Reset
               </button>
             </div>
           </div>

@@ -480,9 +480,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function getVal(id) {
-    const el = document.getElementById(id);
-    return el ? el.value.trim() : '';
+  function getVal(id, fallbackVal = '') {
+    const el = document.getElementById(id) || document.getElementById(id + '-admin');
+    if (!el) return fallbackVal;
+    const v = el.value !== undefined ? el.value.trim() : '';
+    return v !== '' ? v : fallbackVal;
   }
 
   function bindImageField(fieldId, initialUrl) {
@@ -1356,138 +1358,154 @@ Terima kasih.`;
     const data = DataStore.get();
 
     // General
-    data.general.siteTitle = getVal('site-title') || data.general.siteTitle;
-    data.general.coupleNameShort = getVal('couple-name-short') || data.general.coupleNameShort;
-    data.general.coverToPrefix = getVal('cover-to-prefix') || data.general.coverToPrefix;
-    data.general.defaultGuestName = getVal('default-guest-name') || data.general.defaultGuestName;
-    data.general.brandName = getVal('brand-name') || data.general.brandName;
-    data.general.brandUrl = getVal('brand-url') || data.general.brandUrl;
-    data.general.quote = getVal('quote-text') || getVal('quote-text-admin') || data.general.quote;
-    data.general.quoteSource = getVal('quote-source') || getVal('quote-source-admin') || data.general.quoteSource;
+    data.general.siteTitle = getVal('site-title', data.general.siteTitle);
+    data.general.coupleNameShort = getVal('couple-name-short', data.general.coupleNameShort);
+    data.general.coverToPrefix = getVal('cover-to-prefix', data.general.coverToPrefix);
+    data.general.defaultGuestName = getVal('default-guest-name', data.general.defaultGuestName);
+    data.general.brandName = getVal('brand-name', data.general.brandName);
+    data.general.brandUrl = getVal('brand-url', data.general.brandUrl);
+    data.general.quote = getVal('quote-text', data.general.quote);
+    data.general.quoteSource = getVal('quote-source', data.general.quoteSource);
 
     // Groom
-    data.general.groom.photo = getVal('groom-photo') || data.general.groom.photo;
-    data.general.groom.fullName = getVal('groom-fullname') || data.general.groom.fullName;
-    data.general.groom.nickname = getVal('groom-nickname') || data.general.groom.nickname;
-    data.general.groom.parents = getVal('groom-parents') || data.general.groom.parents;
-    data.general.groom.instagram = getVal('groom-instagram') || data.general.groom.instagram;
-    data.general.groom.about = getVal('groom-about') || data.general.groom.about;
+    data.general.groom.photo = getVal('groom-photo', data.general.groom.photo);
+    data.general.groom.fullName = getVal('groom-fullname', data.general.groom.fullName);
+    data.general.groom.nickname = getVal('groom-nickname', data.general.groom.nickname);
+    data.general.groom.parents = getVal('groom-parents', data.general.groom.parents);
+    data.general.groom.instagram = getVal('groom-instagram', data.general.groom.instagram);
+    data.general.groom.about = getVal('groom-about', data.general.groom.about);
 
     // Bride
-    data.general.bride.photo = getVal('bride-photo') || data.general.bride.photo;
-    data.general.bride.fullName = getVal('bride-fullname') || data.general.bride.fullName;
-    data.general.bride.nickname = getVal('bride-nickname') || data.general.bride.nickname;
-    data.general.bride.parents = getVal('bride-parents') || data.general.bride.parents;
-    data.general.bride.instagram = getVal('bride-instagram') || data.general.bride.instagram;
-    data.general.bride.about = getVal('bride-about') || data.general.bride.about;
+    data.general.bride.photo = getVal('bride-photo', data.general.bride.photo);
+    data.general.bride.fullName = getVal('bride-fullname', data.general.bride.fullName);
+    data.general.bride.nickname = getVal('bride-nickname', data.general.bride.nickname);
+    data.general.bride.parents = getVal('bride-parents', data.general.bride.parents);
+    data.general.bride.instagram = getVal('bride-instagram', data.general.bride.instagram);
+    data.general.bride.about = getVal('bride-about', data.general.bride.about);
 
     // Event & Countdown
-    data.event.countdownDate = getVal('countdown-date') || data.event.countdownDate;
+    data.event.countdownDate = getVal('countdown-date', data.event.countdownDate);
 
     // Akad
-    data.event.akad.title = getVal('akad-title') || data.event.akad.title;
-    data.event.akad.date = getVal('akad-date') || getVal('akad-date-admin') || data.event.akad.date;
-    data.event.akad.time = getVal('akad-time') || getVal('akad-time-admin') || data.event.akad.time;
-    data.event.akad.venue = getVal('akad-venue') || getVal('akad-venue-admin') || data.event.akad.venue;
-    data.event.akad.address = getVal('akad-address') || getVal('akad-address-admin') || data.event.akad.address;
-    data.event.akad.mapsUrl = getVal('akad-maps') || data.event.akad.mapsUrl;
+    data.event.akad.title = getVal('akad-title', data.event.akad.title);
+    data.event.akad.date = getVal('akad-date', data.event.akad.date);
+    data.event.akad.time = getVal('akad-time', data.event.akad.time);
+    data.event.akad.venue = getVal('akad-venue', data.event.akad.venue);
+    data.event.akad.address = getVal('akad-address', data.event.akad.address);
+    data.event.akad.mapsUrl = getVal('akad-maps', data.event.akad.mapsUrl);
 
     // Resepsi
-    data.event.resepsi.title = getVal('resepsi-title') || data.event.resepsi.title;
-    data.event.resepsi.date = getVal('resepsi-date') || getVal('resepsi-date-admin') || data.event.resepsi.date;
-    data.event.resepsi.time = getVal('resepsi-time') || getVal('resepsi-time-admin') || data.event.resepsi.time;
-    data.event.resepsi.venue = getVal('resepsi-venue') || getVal('resepsi-venue-admin') || data.event.resepsi.venue;
-    data.event.resepsi.address = getVal('resepsi-address') || getVal('resepsi-address-admin') || data.event.resepsi.address;
-    data.event.resepsi.mapsUrl = getVal('resepsi-maps') || data.event.resepsi.mapsUrl;
+    data.event.resepsi.title = getVal('resepsi-title', data.event.resepsi.title);
+    data.event.resepsi.date = getVal('resepsi-date', data.event.resepsi.date);
+    data.event.resepsi.time = getVal('resepsi-time', data.event.resepsi.time);
+    data.event.resepsi.venue = getVal('resepsi-venue', data.event.resepsi.venue);
+    data.event.resepsi.address = getVal('resepsi-address', data.event.resepsi.address);
+    data.event.resepsi.mapsUrl = getVal('resepsi-maps', data.event.resepsi.mapsUrl);
 
     // Story
     if (!data.story) data.story = {};
-    data.story.title = getVal('story-section-title') || data.story.title || 'Our Love Story';
-    data.story.subtitle = getVal('story-section-subtitle') || data.story.subtitle || 'Bagaimana Kisah Kami Dimulai';
+    data.story.title = getVal('story-section-title', data.story.title || 'Our Love Story');
+    data.story.subtitle = getVal('story-section-subtitle', data.story.subtitle || 'Bagaimana Kisah Kami Dimulai');
 
     // Streaming
     if (!data.streaming) data.streaming = {};
     const streamEnable = document.getElementById('streaming-enable');
     if (streamEnable) data.streaming.enabled = streamEnable.checked;
-    data.streaming.title = getVal('streaming-title') || data.streaming.title;
-    data.streaming.subtitle = getVal('streaming-subtitle') || data.streaming.subtitle;
-    data.streaming.description = getVal('streaming-desc') || data.streaming.description;
-    data.streaming.youtubeUrl = getVal('streaming-yt-url') || data.streaming.youtubeUrl;
-    data.streaming.embedUrl = getVal('streaming-embed-url') || data.streaming.embedUrl;
-    data.streaming.buttonText = getVal('streaming-btn-text') || data.streaming.buttonText;
+    data.streaming.title = getVal('streaming-title', data.streaming.title);
+    data.streaming.subtitle = getVal('streaming-subtitle', data.streaming.subtitle);
+    data.streaming.description = getVal('streaming-desc', data.streaming.description);
+    data.streaming.youtubeUrl = getVal('streaming-yt-url', data.streaming.youtubeUrl);
+    data.streaming.embedUrl = getVal('streaming-embed-url', data.streaming.embedUrl);
+    data.streaming.buttonText = getVal('streaming-btn-text', data.streaming.buttonText);
 
     // Media
-    data.media.coverImage = getVal('cover-image') || getVal('cover-image-admin') || data.media.coverImage;
-    data.media.heroMain = getVal('hero-main-image') || data.media.heroMain;
-    data.media.heroCouple1 = getVal('hero-couple-1') || data.media.heroCouple1;
-    data.media.heroCouple2 = getVal('hero-couple-2') || data.media.heroCouple2;
-    data.media.heroCouple3 = getVal('hero-couple-3') || data.media.heroCouple3;
-    data.media.heroCouple4 = getVal('hero-couple-4') || data.media.heroCouple4;
-    data.media.bgLocation = getVal('bg-location') || data.media.bgLocation;
-    data.media.bgDresscode = getVal('bg-dresscode') || data.media.bgDresscode;
-    data.media.bgGift = getVal('bg-gift') || data.media.bgGift;
+    data.media.coverImage = getVal('cover-image', data.media.coverImage);
+    data.media.heroMain = getVal('hero-main-image', data.media.heroMain);
+    data.media.heroCouple1 = getVal('hero-couple-1', data.media.heroCouple1);
+    data.media.heroCouple2 = getVal('hero-couple-2', data.media.heroCouple2);
+    data.media.heroCouple3 = getVal('hero-couple-3', data.media.heroCouple3);
+    data.media.heroCouple4 = getVal('hero-couple-4', data.media.heroCouple4);
+    data.media.bgLocation = getVal('bg-location', data.media.bgLocation);
+    data.media.bgDresscode = getVal('bg-dresscode', data.media.bgDresscode);
+    data.media.bgGift = getVal('bg-gift', data.media.bgGift);
 
     // Audio
     if (!data.media.audio) data.media.audio = {};
-    data.media.audio.url = getVal('audio-url') || data.media.audio.url || 'assets/audio/wedding-song.mp3';
-    data.media.audio.title = getVal('audio-title') || data.media.audio.title || 'Wedding Romantic Instrumental';
+    data.media.audio.url = getVal('audio-url', data.media.audio.url || 'assets/audio/wedding-song.mp3');
+    data.media.audio.title = getVal('audio-title', data.media.audio.title || 'Wedding Romantic Instrumental');
     const audioAutoplayEl = document.getElementById('audio-autoplay');
     if (audioAutoplayEl) data.media.audio.autoplay = audioAutoplayEl.checked;
 
     // Dresscode
-    data.dresscode.description = getVal('dresscode-desc') || data.dresscode.description;
+    data.dresscode.description = getVal('dresscode-desc', data.dresscode.description);
 
     // Physical gift
     const physEnable = document.getElementById('phys-gift-enable');
     if (!data.gift.physicalGift) data.gift.physicalGift = {};
     if (physEnable) data.gift.physicalGift.enabled = physEnable.checked;
-    data.gift.physicalGift.recipientName = getVal('phys-recipient-name') || getVal('phys-recipient-name-admin') || data.gift.physicalGift.recipientName;
-    data.gift.physicalGift.address = getVal('phys-address') || getVal('phys-address-admin') || data.gift.physicalGift.address;
-    data.gift.physicalGift.phone = getVal('phys-phone') || data.gift.physicalGift.phone;
+    data.gift.physicalGift.recipientName = getVal('phys-recipient-name', data.gift.physicalGift.recipientName);
+    data.gift.physicalGift.address = getVal('phys-address', data.gift.physicalGift.address);
+    data.gift.physicalGift.phone = getVal('phys-phone', data.gift.physicalGift.phone);
 
     // Appearance
     if (!data.appearance) data.appearance = {};
-    data.appearance.primaryColor = getVal('theme-primary-color') || data.appearance.primaryColor;
-    data.appearance.secondaryColor = getVal('theme-secondary-color') || data.appearance.secondaryColor;
-    data.appearance.accentColor = getVal('theme-accent-color') || data.appearance.accentColor;
-    data.appearance.bgBase = getVal('theme-bg-base') || data.appearance.bgBase;
-    data.appearance.cardBg = getVal('theme-card-bg') || data.appearance.cardBg;
-    data.appearance.titleFont = getVal('theme-font-title') || data.appearance.titleFont;
-    data.appearance.headingFont = getVal('theme-font-heading') || data.appearance.headingFont;
-    data.appearance.bodyFont = getVal('theme-font-body') || data.appearance.bodyFont;
-    data.appearance.scriptFont = getVal('theme-font-script') || data.appearance.scriptFont;
-    data.appearance.customCss = getVal('custom-css-code') || data.appearance.customCss;
-    data.appearance.customJs = getVal('custom-js-code') || data.appearance.customJs;
+    data.appearance.primaryColor = getVal('theme-primary-color', data.appearance.primaryColor);
+    data.appearance.secondaryColor = getVal('theme-secondary-color', data.appearance.secondaryColor);
+    data.appearance.accentColor = getVal('theme-accent-color', data.appearance.accentColor);
+    data.appearance.bgBase = getVal('theme-bg-base', data.appearance.bgBase);
+    data.appearance.cardBg = getVal('theme-card-bg', data.appearance.cardBg);
+    data.appearance.titleFont = getVal('theme-font-title', data.appearance.titleFont);
+    data.appearance.headingFont = getVal('theme-font-heading', data.appearance.headingFont);
+    data.appearance.bodyFont = getVal('theme-font-body', data.appearance.bodyFont);
+    data.appearance.scriptFont = getVal('theme-font-script', data.appearance.scriptFont);
+    data.appearance.customCss = getVal('custom-css-code', data.appearance.customCss);
+    data.appearance.customJs = getVal('custom-js-code', data.appearance.customJs);
 
     // Particles Engine Config
     if (!data.appearance.particles) data.appearance.particles = {};
     const particleEnable = document.getElementById('particle-enable');
-    const pType = getVal('particle-type') || data.appearance.particles.type || 'flowers';
+    const pType = getVal('particle-type', data.appearance.particles.type || 'flowers');
     data.appearance.particles.enabled = particleEnable ? particleEnable.checked : true;
     data.appearance.particles.type = (particleEnable && !particleEnable.checked) ? 'none' : pType;
-    data.appearance.particles.speed = getVal('particle-speed') || 'medium';
-    data.appearance.particles.density = getVal('particle-density') || 'medium';
-    data.appearance.particles.size = getVal('particle-size') || 'medium';
-    data.appearance.particles.colorMode = getVal('particle-color-mode') || 'auto';
-    data.appearance.particles.customColor = getVal('particle-custom-color') || '#d4af37';
-    data.appearance.particles.windSway = getVal('particle-wind-sway') || 'gentle';
+    data.appearance.particles.speed = getVal('particle-speed', 'medium');
+    data.appearance.particles.density = getVal('particle-density', 'medium');
+    data.appearance.particles.size = getVal('particle-size', 'medium');
+    data.appearance.particles.colorMode = getVal('particle-color-mode', 'auto');
+    data.appearance.particles.customColor = getVal('particle-custom-color', '#d4af37');
+    data.appearance.particles.windSway = getVal('particle-wind-sway', 'gentle');
     data.appearance.fallingParticles = data.appearance.particles.type;
 
     DataStore.save(data);
     
     if (notifyUser) {
-      showAdminToast('Seluruh konfigurasi tema & data berhasil disimpan! 🎉');
+      showAdminToast('Seluruh konfigurasi tema & data berhasil disimpan & disinkronkan ke tampilan tamu! 🎉');
     }
   }
 
   /* ===================================================================
-     16. BACKUP & RESTORE
+     16. BACKUP & RESTORE / PUBLISH SYNC
      =================================================================== */
   function initBackupRestore() {
     document.querySelectorAll('#btn-export-json').forEach(btn => {
       btn.onclick = () => {
         DataStore.exportJSON();
         showAdminToast('File backup JSON berhasil diunduh!');
+      };
+    });
+
+    document.querySelectorAll('#btn-export-data-json').forEach(btn => {
+      btn.onclick = () => {
+        DataStore.exportDataJSON();
+        showAdminToast('File data.json siap publikasi berhasil diunduh! 🎉');
+      };
+    });
+
+    document.querySelectorAll('#btn-copy-json').forEach(btn => {
+      btn.onclick = () => {
+        const jsonStr = JSON.stringify(DataStore.get(), null, 2);
+        navigator.clipboard.writeText(jsonStr).then(() => {
+          showAdminToast('Data JSON berhasil disalin ke clipboard! 📋');
+        });
       };
     });
 

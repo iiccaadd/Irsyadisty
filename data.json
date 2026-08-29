@@ -1,0 +1,335 @@
+{
+  "dataVersion": "2026.08.29.v3",
+  "general": {
+    "siteTitle": "The Wedding of Irsyad & Adisty",
+    "coupleNameShort": "Irsyad & Adisty",
+    "groom": {
+      "fullName": "Irsyad",
+      "nickname": "Irsyad",
+      "parents": "Putra Tercinta dari Bpk. & Ibu",
+      "photo": "assets/images/hero-couple-1.jpg",
+      "instagram": "https://instagram.com",
+      "about": "The handsome groom who found his true soulmate."
+    },
+    "bride": {
+      "fullName": "Adisty",
+      "nickname": "Adisty",
+      "parents": "Putri Tercinta dari Bpk. & Ibu",
+      "photo": "assets/images/hero-couple-2.jpg",
+      "instagram": "https://instagram.com",
+      "about": "The lovely bride who completes this beautiful journey."
+    },
+    "quote": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought",
+    "quoteSource": "QS. Ar-Rum : 21",
+    "coverVersion": 1,
+    "coverToPrefix": "Dear",
+    "defaultGuestName": "Penerima Undangan",
+    "brandName": "Irsyad & Adisty",
+    "brandUrl": "",
+    "adminPin": "1234"
+  },
+  "sections": {
+    "hero": true,
+    "couple": true,
+    "story": true,
+    "events": true,
+    "streaming": true,
+    "countdown": true,
+    "dresscode": true,
+    "gallery": true,
+    "gift": true,
+    "turutMengundang": true,
+    "prokes": true,
+    "wishes": true,
+    "footer": true
+  },
+  "event": {
+    "countdownDate": "2027-05-18T08:00:00",
+    "calendarTitle": "Pernikahan Irsyad & Adisty",
+    "calendarDesc": "Menghadiri pernikahan Irsyad & Adisty di The Trans Luxury Hotel Bandung",
+    "calendarLocation": "The Trans Luxury Hotel, Jl. Gatot Subroto No.289, Bandung",
+    "akad": {
+      "title": "Akad Nikah",
+      "date": "Selasa, 18 Mei 2027",
+      "time": "08:00 - 10:00 WIB",
+      "venue": "The Trans Luxury Hotel",
+      "address": "📍 Jl. Gatot Subroto No.289, Cibangkong, Kec. Batununggal, Kota Bandung, Jawa Barat 40273",
+      "mapsUrl": "https://maps.google.com/?q=The+Trans+Luxury+Hotel+Bandung"
+    },
+    "resepsi": {
+      "title": "Resepsi Pernikahan",
+      "date": "Selasa, 18 Mei 2027",
+      "time": "11:00 - 14:00 WIB",
+      "venue": "The Trans Luxury Hotel (Grand Ballroom)",
+      "address": "📍 Jl. Gatot Subroto No.289, Cibangkong, Kec. Batununggal, Kota Bandung, Jawa Barat 40273",
+      "mapsUrl": "https://maps.google.com/?q=The+Trans+Luxury+Hotel+Bandung"
+    }
+  },
+  "story": {
+    "title": "Our Love Story",
+    "subtitle": "Bagaimana Kisah Kami Dimulai",
+    "timeline": [
+      {
+        "id": "s1",
+        "date": "12 Januari 2022",
+        "title": "Pertama Bertemu",
+        "story": "Pertama kali kami saling menyapa dalam sebuah pertemuan tak terduga di Bandung. Percakapan singkat yang meninggalkan kesan mendalam bagi kami berdua.",
+        "image": "assets/images/gallery-1.jpg"
+      },
+      {
+        "id": "s2",
+        "date": "15 Juni 2024",
+        "title": "Menyatakan Komitmen",
+        "story": "Setelah dua tahun saling mengenal, berbagi cerita suka dan duka, kami memutuskan untuk berkomitmen melangkah bersama ke jenjang yang lebih serius.",
+        "image": "assets/images/gallery-2.jpg"
+      },
+      {
+        "id": "s3",
+        "date": "20 Desember 2026",
+        "title": "Lamaran (Engagement Day)",
+        "story": "Di hadapan kedua keluarga besar, sebuah cincin tersemat sebagai ikrar pertunangan suci yang mempertemukan dua hati dan dua keluarga.",
+        "image": "assets/images/gallery-3.jpg"
+      },
+      {
+        "id": "s4",
+        "date": "18 Mei 2027",
+        "title": "Hari Bahagia Pernikahan",
+        "story": "Insya Allah, ikrar suci akad nikah akan mengikat kami dalam pernikahan yang abadi, sakinah, mawaddah, dan warahmah.",
+        "image": "assets/images/gallery-4.jpg"
+      }
+    ]
+  },
+  "streaming": {
+    "enabled": true,
+    "title": "Live Streaming",
+    "subtitle": "Virtual Wedding Celebration",
+    "description": "Bagi keluarga dan sahabat yang belum dapat hadir secara langsung, Anda dapat tetap menyaksikan siaran langsung pernikahan kami secara daring.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "buttonText": "Tonton Live Streaming"
+  },
+  "turutMengundang": {
+    "enabled": true,
+    "title": "Turut Mengundang",
+    "families": [
+      "Keluarga Besar Bpk. Lord Montague (Bandung)",
+      "Keluarga Besar Bpk. Lord Capulet (Jakarta)",
+      "Keluarga Besar H. Sastro (Surabaya)",
+      "Keluarga Besar Bani Abdullah (Yogyakarta)"
+    ]
+  },
+  "prokes": {
+    "enabled": true,
+    "title": "Protokol Kesehatan",
+    "subtitle": "Demi kenyamanan dan keselamatan bersama, para tamu undangan dihimbau untuk mematuhi protokol kesehatan:",
+    "items": [
+      {
+        "icon": "fas fa-head-side-mask",
+        "text": "Menggunakan Masker"
+      },
+      {
+        "icon": "fas fa-hands-wash",
+        "text": "Mencuci Tangan / Hand Sanitizer"
+      },
+      {
+        "icon": "fas fa-people-arrows",
+        "text": "Menjaga Jarak Fisik"
+      },
+      {
+        "icon": "fas fa-temperature-high",
+        "text": "Pengecekan Suhu Tubuh"
+      }
+    ]
+  },
+  "media": {
+    "coverImage": "assets/images/cover.jpg",
+    "heroMain": "assets/images/hero-main.jpg",
+    "heroCouple1": "assets/images/hero-couple-1.jpg",
+    "heroCouple2": "assets/images/hero-couple-2.jpg",
+    "heroCouple3": "assets/images/hero-couple-3.jpg",
+    "heroCouple4": "assets/images/hero-couple-4.jpg",
+    "bgLocation": "assets/images/bg-location.png",
+    "bgDresscode": "assets/images/bg-dresscode.jpg",
+    "bgGift": "assets/images/bg-gift.png",
+    "gallery": [
+      {
+        "id": "g1",
+        "url": "assets/images/gallery-1.jpg",
+        "caption": "Sweet Memories"
+      },
+      {
+        "id": "g2",
+        "url": "assets/images/gallery-2.jpg",
+        "caption": "Forever in Love"
+      },
+      {
+        "id": "g3",
+        "url": "assets/images/gallery-3.jpg",
+        "caption": "Journey of Two"
+      },
+      {
+        "id": "g4",
+        "url": "assets/images/gallery-4.jpg",
+        "caption": "A Beautiful Promise"
+      },
+      {
+        "id": "g5",
+        "url": "assets/images/gallery-5.jpg",
+        "caption": "Side by Side"
+      },
+      {
+        "id": "g6",
+        "url": "assets/images/gallery-6.jpg",
+        "caption": "Growing Together"
+      }
+    ],
+    "audio": {
+      "url": "assets/audio/wedding-song.mp3",
+      "onlineFallbackUrl": "https://www.image2url.com/r2/default/audio/1786971055013-6eee6170-7697-412d-8137-6ad2eb6548f6.mp3",
+      "title": "Wedding Romantic Instrumental",
+      "autoplay": true
+    }
+  },
+  "dresscode": {
+    "title": "Dress Code",
+    "description": "We kindly encourage our guests to wear your best & comfiest outfit.",
+    "colors": [
+      {
+        "name": "Earth Dark",
+        "hex": "#2c2825"
+      },
+      {
+        "name": "Espresso",
+        "hex": "#4a3b32"
+      },
+      {
+        "name": "Warm Taupe",
+        "hex": "#8c7a6b"
+      },
+      {
+        "name": "Champagne Cream",
+        "hex": "#e8dfd8"
+      },
+      {
+        "name": "Soft Ivory",
+        "hex": "#f5f2eb"
+      }
+    ]
+  },
+  "gift": {
+    "title": "Wedding Gift",
+    "description": "Your presence on our big day means the world for us, and we truly appreciate you being part of our special moment. With all due respect, should you wish to send a gift, you may use the bank account below.",
+    "banks": [
+      {
+        "id": "b1",
+        "bankName": "Bank Mandiri",
+        "accountNumber": "12312312890",
+        "accountHolder": "Irsyad & Adisty",
+        "icon": "fas fa-university"
+      },
+      {
+        "id": "b2",
+        "bankName": "DANA / GoPay / ShopeePay",
+        "accountNumber": "085712345678",
+        "accountHolder": "Irsyad & Adisty",
+        "icon": "fas fa-wallet"
+      }
+    ],
+    "physicalGift": {
+      "enabled": true,
+      "recipientName": "Irsyad & Adisty",
+      "address": "Jl. Gatot Subroto No.289, Cibangkong, Batununggal, Kota Bandung, Jawa Barat 40273",
+      "phone": "085712345678"
+    }
+  },
+  "appearance": {
+    "themePreset": "luxury-gold",
+    "primaryColor": "#d4af37",
+    "secondaryColor": "#f3f0eb",
+    "accentColor": "#e5c158",
+    "bgBase": "#0a0a0a",
+    "cardBg": "rgba(20, 20, 20, 0.85)",
+    "textColor": "#f3f0eb",
+    "titleFont": "'Playfair Display', serif",
+    "headingFont": "'Alata', sans-serif",
+    "bodyFont": "'DM Sans', sans-serif",
+    "scriptFont": "'Alex Brush', cursive",
+    "customCss": "",
+    "customJs": "",
+    "fallingParticles": "flowers",
+    "particles": {
+      "enabled": true,
+      "type": "flowers",
+      "speed": "medium",
+      "density": "medium",
+      "size": "medium",
+      "colorMode": "auto",
+      "customColor": "#d4af37",
+      "windSway": "gentle"
+    }
+  },
+  "guestList": [
+    {
+      "id": "gst_1",
+      "name": "Bapak Joko & Keluarga",
+      "category": "VIP",
+      "session": "Sesi 1 (Akad & Resepsi)",
+      "table": "Meja VIP 01",
+      "phone": "081234567890",
+      "createdAt": "2026-05-18"
+    },
+    {
+      "id": "gst_2",
+      "name": "Anisa Putri",
+      "category": "Teman",
+      "session": "Sesi 2 (Resepsi)",
+      "table": "Meja 05",
+      "phone": "081298765432",
+      "createdAt": "2026-05-18"
+    },
+    {
+      "id": "gst_3",
+      "name": "Dimas & Rara",
+      "category": "Keluarga",
+      "session": "Sesi 1 (Akad & Resepsi)",
+      "table": "Meja Keluarga",
+      "phone": "085711223344",
+      "createdAt": "2026-05-18"
+    }
+  ],
+  "wishes": [
+    {
+      "id": "w1",
+      "name": "Budi Santoso & Keluarga",
+      "status": "hadir",
+      "pax": 2,
+      "message": "Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah selalu.",
+      "sticker": "assets/stickers/sticker001.gif",
+      "createdAt": "2026-05-18 10:20",
+      "likes": 5,
+      "reply": "Terima kasih banyak atas doa dan kehadirannya Kak Budi sekeluarga! ❤️"
+    },
+    {
+      "id": "w2",
+      "name": "Anisa Putri",
+      "status": "hadir",
+      "pax": 1,
+      "message": "Happy Wedding Irsyad & Adisty! So happy for both of you! Langgeng sampai kakek nenek yaa ✨",
+      "sticker": "assets/stickers/sticker004.gif",
+      "createdAt": "2026-05-18 11:45",
+      "likes": 3,
+      "reply": ""
+    },
+    {
+      "id": "w3",
+      "name": "Dimas & Rara",
+      "status": "ragu",
+      "pax": 2,
+      "message": "Barakallahu lakum wa baraka alaikum. Semoga acaranya lancar tanpa halangan!",
+      "sticker": "assets/stickers/sticker007.gif",
+      "createdAt": "2026-05-18 14:10",
+      "likes": 2,
+      "reply": ""
+    }
+  ]
+}

@@ -342,30 +342,78 @@ const DataStore = {
   },
 
   /**
-   * Save data to local storage and broadcast change
+   * Save data to local storage and broadcast change across ALL channels:
+   * 1. LocalStorage
+   * 2. CustomEvent (same window)
+   * 3. BroadcastChannel (all open tabs & windows on same browser)
+   * 4. postMessage (child iframes, parent window, opener window)
    */
   save(data) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      
+      // 1. Same-window CustomEvent
       window.dispatchEvent(new CustomEvent('invitationDataUpdated', { detail: data }));
       
-      // Also broadcast to any child iframe if present
+      // 2. BroadcastChannel for instant multi-tab sync
+      if (typeof BroadcastChannel !== 'undefined') {
+        try {
+          const bc = new BroadcastChannel('wedding_invitation_sync_channel');
+          bc.postMessage({ type: 'invitationDataUpdated', data: data });
+          bc.close();
+        } catch (bcErr) {
+          // ignore
+        }
+      }
+
+      // 3. Broadcast to all iframes (e.g. simulator iframe inside admin)
       const iframes = document.querySelectorAll('iframe');
       iframes.forEach(iframe => {
         try {
           if (iframe.contentWindow) {
             iframe.contentWindow.postMessage({ type: 'invitationDataUpdated', data: data }, '*');
           }
-        } catch(err) {
-          // ignore cross-domain
-        }
+        } catch(err) {}
       });
+
+      // 4. Broadcast to parent / opener window if admin opened in popup/tab
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'invitationDataUpdated', data: data }, '*');
+        }
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: 'invitationDataUpdated', data: data }, '*');
+        }
+      } catch(winErr) {}
 
       return true;
     } catch (e) {
       console.error('Error saving DataStore', e);
       return false;
     }
+  },
+
+  /**
+   * Load remote data.json file from server (for guests on any device)
+   */
+  async loadRemoteData() {
+    try {
+      const response = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
+      if (response.ok) {
+        const remoteData = await response.json();
+        if (remoteData && remoteData.general) {
+          // Check if remote data has content
+          const localData = this.get();
+          // Merge remote data with local schema
+          const merged = this._deepMerge(localData, remoteData);
+          this.save(merged);
+          return merged;
+        }
+      }
+    } catch (err) {
+      // Offline or local file fallback
+    }
+    return this.get();
   },
 
   /**
@@ -386,6 +434,20 @@ const DataStore = {
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
     downloadAnchor.setAttribute("download", `undangan-irsyad-adisty-config-${new Date().toISOString().slice(0,10)}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  },
+
+  /**
+   * Export exact data.json file ready to be saved into project root for permanent server publishing
+   */
+  exportDataJSON() {
+    const data = this.get();
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "data.json");
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();

@@ -97,6 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Initialize dynamic theme & check remote data
+  if (typeof DataStore.loadRemoteData === 'function') {
+    DataStore.loadRemoteData().then(latestData => {
+      if (latestData) handleDataUpdate(latestData);
+    }).catch(() => {});
+  }
+
   // 1. Same-window / Local event
   window.addEventListener('invitationDataUpdated', (e) => {
     handleDataUpdate(e.detail);
@@ -114,12 +121,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3. PostMessage event (When loaded inside Admin Simulator iframe)
+  // 3. PostMessage event (When loaded inside Admin Simulator iframe, parent or popup window)
   window.addEventListener('message', (e) => {
     if (e.data && e.data.type === 'invitationDataUpdated' && e.data.data) {
       handleDataUpdate(e.data.data);
     }
   });
+
+  // 4. BroadcastChannel for instant real-time sync across all tabs/windows
+  if (typeof BroadcastChannel !== 'undefined') {
+    try {
+      const syncBc = new BroadcastChannel('wedding_invitation_sync_channel');
+      syncBc.onmessage = (e) => {
+        if (e.data && e.data.type === 'invitationDataUpdated' && e.data.data) {
+          handleDataUpdate(e.data.data);
+        }
+      };
+    } catch(bcErr) {}
+  }
 
   // Open Invitation Button Click
   const btnOpen = document.getElementById('btn-open-inv');
