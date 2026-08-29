@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const iframePreview = document.getElementById('preview-iframe');
 
   // Initialize UI & Populate All Forms
+  initAdminAuth();
   initTabs();
   initUnifiedDrawer();
   initDeviceSwitcher();
@@ -68,17 +69,140 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ===================================================================
+     0. ADMIN AUTHENTICATION & LOGIN PROTECTION
+     Credentials:
+     - Username: irsyadisty
+     - Password: 11nov2026
+     =================================================================== */
+  const AUTH_STORAGE_KEY = 'wedding_admin_auth_session';
+  const VALID_USER = 'irsyadisty';
+  const VALID_PASS = '11nov2026';
+
+  function isUserAuthenticated() {
+    return sessionStorage.getItem(AUTH_STORAGE_KEY) === 'authenticated_irsyadisty';
+  }
+
+  function initAdminAuth() {
+    const authOverlay = document.getElementById('admin-auth-overlay');
+    const loginForm = document.getElementById('admin-login-form');
+    const userInput = document.getElementById('admin-auth-user');
+    const passInput = document.getElementById('admin-auth-pass');
+    const errorBox = document.getElementById('admin-auth-error');
+    const togglePassBtn = document.getElementById('btn-toggle-pass');
+    const cancelAuthBtn = document.getElementById('btn-auth-cancel');
+    const logoutBtns = document.querySelectorAll('.btn-logout');
+    const isStandaloneAdmin = document.body.classList.contains('admin-page');
+
+    // Initial state check
+    if (isStandaloneAdmin) {
+      if (isUserAuthenticated()) {
+        if (authOverlay) authOverlay.classList.add('auth-hidden');
+      } else {
+        if (authOverlay) authOverlay.classList.remove('auth-hidden');
+        if (userInput) userInput.focus();
+      }
+    } else {
+      if (authOverlay) authOverlay.classList.add('auth-hidden');
+    }
+
+    // Toggle Password Visibility
+    if (togglePassBtn && passInput) {
+      togglePassBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isPass = passInput.type === 'password';
+        passInput.type = isPass ? 'text' : 'password';
+        togglePassBtn.innerHTML = isPass ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+      });
+    }
+
+    // Cancel / Close Auth Modal (for in-page guest view)
+    if (cancelAuthBtn && authOverlay) {
+      cancelAuthBtn.addEventListener('click', () => {
+        authOverlay.classList.add('auth-hidden');
+        if (errorBox) errorBox.style.display = 'none';
+        if (loginForm) loginForm.reset();
+      });
+    }
+
+    // Form Submission
+    if (loginForm) {
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userVal = (userInput ? userInput.value : '').trim();
+        const passVal = passInput ? passInput.value : '';
+
+        if (userVal.toLowerCase() === VALID_USER && passVal === VALID_PASS) {
+          // Success
+          sessionStorage.setItem(AUTH_STORAGE_KEY, 'authenticated_irsyadisty');
+          if (authOverlay) authOverlay.classList.add('auth-hidden');
+          if (errorBox) errorBox.style.display = 'none';
+          showAdminToast('Login berhasil! Selamat datang Admin Irsyad & Adisty.');
+          loginForm.reset();
+
+          // If inside index.html drawer, open it
+          if (!isStandaloneAdmin && unifiedDrawer) {
+            unifiedDrawer.classList.add('open');
+          }
+        } else {
+          // Failed
+          if (errorBox) {
+            errorBox.textContent = 'Username atau Password salah! Silakan coba lagi.';
+            errorBox.style.display = 'block';
+          }
+          const card = authOverlay ? authOverlay.querySelector('.admin-auth-card') : null;
+          if (card) {
+            card.classList.remove('shake-error');
+            void card.offsetWidth;
+            card.classList.add('shake-error');
+          }
+          if (passInput) {
+            passInput.value = '';
+            passInput.focus();
+          }
+        }
+      });
+    }
+
+    // Logout Handlers
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
+        showAdminToast('Anda telah berhasil keluar (Logout).');
+
+        if (isStandaloneAdmin) {
+          if (authOverlay) {
+            authOverlay.classList.remove('auth-hidden');
+            if (userInput) userInput.focus();
+          }
+        } else {
+          if (unifiedDrawer) unifiedDrawer.classList.remove('open');
+        }
+      });
+    });
+  }
+
+  /* ===================================================================
      1. UNIFIED IN-PAGE DRAWER TOGGLE (PORTAL & PENGATURAN JADI SATU)
      =================================================================== */
   function initUnifiedDrawer() {
     const btnOpenTop = document.getElementById('btn-unified-admin-open');
     const btnOpenGear = document.getElementById('btn-admin-gear');
     const btnClose = document.getElementById('btn-close-unified-drawer');
+    const authOverlay = document.getElementById('admin-auth-overlay');
 
-    function openDrawer() {
-      if (unifiedDrawer) {
-        unifiedDrawer.classList.add('open');
-        showAdminToast('Mode Editor Aktif! Perubahan langsung terlihat seketika.');
+    function triggerDrawerOpen() {
+      if (isUserAuthenticated()) {
+        if (unifiedDrawer) {
+          unifiedDrawer.classList.add('open');
+          showAdminToast('Mode Editor Aktif! Perubahan langsung terlihat seketika.');
+        }
+      } else {
+        if (authOverlay) {
+          authOverlay.classList.remove('auth-hidden');
+          const userInput = document.getElementById('admin-auth-user');
+          if (userInput) userInput.focus();
+        }
       }
     }
 
@@ -89,13 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    if (btnOpenTop) btnOpenTop.onclick = openDrawer;
-    if (btnOpenGear) btnOpenGear.onclick = openDrawer;
+    if (btnOpenTop) btnOpenTop.onclick = triggerDrawerOpen;
+    if (btnOpenGear) btnOpenGear.onclick = triggerDrawerOpen;
     if (btnClose) btnClose.onclick = closeDrawer;
 
-    // Auto open if #admin hash or ?mode=admin
+    // Auto open if #admin hash or ?mode=admin AND already authenticated
     if (window.location.hash === '#admin' || window.location.search.includes('mode=admin')) {
-      setTimeout(openDrawer, 300);
+      if (isUserAuthenticated()) {
+        setTimeout(triggerDrawerOpen, 300);
+      }
     }
   }
 

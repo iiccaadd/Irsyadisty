@@ -126,10 +126,13 @@
         </li>
       </ul>
 
-      <div class="sidebar-footer">
+      <div class="sidebar-footer" style="display:flex; flex-direction:column; gap:8px;">
         <a href="index.html" target="_blank" class="admin-btn btn-secondary btn-sm" style="justify-content:center;">
           <i class="fas fa-external-link-alt"></i> Buka Undangan Tamu
         </a>
+        <button type="button" class="admin-btn btn-danger btn-sm btn-logout" style="justify-content:center;" title="Keluar dari Panel Admin">
+          <i class="fas fa-sign-out-alt"></i> Logout / Keluar
+        </button>
       </div>
     </aside>
 
@@ -146,6 +149,9 @@
         <div class="nav-actions">
           <button type="button" class="admin-btn btn-primary" id="btn-save-all">
             <i class="fas fa-save"></i> Simpan Semua Perubahan
+          </button>
+          <button type="button" class="admin-btn btn-danger btn-sm btn-logout" title="Keluar dari sesi Admin">
+            <i class="fas fa-sign-out-alt"></i> Logout
           </button>
         </div>
       </header>
@@ -1163,9 +1169,52 @@
 
   </div>
 
+  <!-- ===================================================================
+       ADMIN AUTHENTICATION MODAL (Username & Password Protection)
+       =================================================================== -->
+  <div class="admin-auth-overlay" id="admin-auth-overlay">
+    <div class="admin-auth-card">
+      <div class="admin-auth-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2 class="admin-auth-title">Admin Panel Login</h2>
+      <p class="admin-auth-subtitle">The Wedding of Irsyad & Adisty</p>
+      
+      <form id="admin-login-form" class="admin-auth-form" autocomplete="off">
+        <div class="admin-auth-group">
+          <label for="admin-auth-user"><i class="fas fa-user"></i> Username</label>
+          <div class="auth-input-wrapper">
+            <input type="text" id="admin-auth-user" placeholder="Masukkan username" required autofocus>
+          </div>
+        </div>
+        
+        <div class="admin-auth-group">
+          <label for="admin-auth-pass"><i class="fas fa-key"></i> Password</label>
+          <div class="auth-input-wrapper">
+            <input type="password" id="admin-auth-pass" placeholder="Masukkan password" required>
+            <button type="button" class="btn-toggle-password" id="btn-toggle-pass" title="Tampilkan/Sembunyikan Password">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-auth-error" id="admin-auth-error" style="display:none;"></div>
+
+        <button type="submit" class="admin-btn btn-primary btn-auth-submit" id="btn-auth-submit">
+          <i class="fas fa-sign-in-alt"></i> Masuk ke Dashboard
+        </button>
+
+        <a href="index.html" class="admin-auth-back-link">
+          <i class="fas fa-arrow-left"></i> Kembali ke Halaman Tamu
+        </a>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/data-store.js"></script>
   <script src="js/particles-engine.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
+

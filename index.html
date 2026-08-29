@@ -444,6 +444,9 @@
         <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-close-unified-drawer" title="Tutup Editor & Lihat Tampilan Tamu">
           <i class="fas fa-eye"></i> Lihat Tamu
         </button>
+        <button type="button" class="admin-btn btn-danger btn-sm btn-logout" id="btn-unified-logout" title="Keluar / Logout dari Admin">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
     </div>
 
@@ -1282,6 +1285,47 @@
 
   </div>
 
+  <!-- ===================================================================
+       ADMIN AUTHENTICATION MODAL (In-Page Protection)
+       =================================================================== -->
+  <div class="admin-auth-overlay auth-hidden" id="admin-auth-overlay">
+    <div class="admin-auth-card">
+      <button type="button" class="btn-close-modal" id="btn-auth-cancel" style="position:absolute; top:16px; right:16px; background:transparent; border:none; color:#888; font-size:18px; cursor:pointer;" title="Tutup Modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="admin-auth-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2 class="admin-auth-title">Admin Panel Login</h2>
+      <p class="admin-auth-subtitle">The Wedding of Irsyad & Adisty</p>
+      
+      <form id="admin-login-form" class="admin-auth-form" autocomplete="off">
+        <div class="admin-auth-group">
+          <label for="admin-auth-user"><i class="fas fa-user"></i> Username</label>
+          <div class="auth-input-wrapper">
+            <input type="text" id="admin-auth-user" placeholder="Masukkan username" required>
+          </div>
+        </div>
+        
+        <div class="admin-auth-group">
+          <label for="admin-auth-pass"><i class="fas fa-key"></i> Password</label>
+          <div class="auth-input-wrapper">
+            <input type="password" id="admin-auth-pass" placeholder="Masukkan password" required>
+            <button type="button" class="btn-toggle-password" id="btn-toggle-pass" title="Tampilkan/Sembunyikan Password">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-auth-error" id="admin-auth-error" style="display:none;"></div>
+
+        <button type="submit" class="admin-btn btn-primary btn-auth-submit" id="btn-auth-submit">
+          <i class="fas fa-sign-in-alt"></i> Masuk ke Editor
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/data-store.js"></script>
   <script src="js/particles-engine.js"></script>
@@ -1289,3 +1333,4 @@
   <script src="js/admin.js"></script>
 </body>
 </html>
+
