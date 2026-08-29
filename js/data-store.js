@@ -143,7 +143,7 @@ const DEFAULT_INVITATION_DATA = {
     heroMain: "assets/images/hero-main.jpg",
     heroCouple1: "assets/images/hero-couple-1.jpg",
     heroCouple2: "assets/images/hero-couple-2.jpg",
-    heroCouple3: "assets/images/hero-couple-3.jpg",
+    heroCouple3: "assets/images/hero-couple-1.jpg",
     heroCouple4: "assets/images/hero-couple-4.jpg",
     bgLocation: "assets/images/bg-location.png",
     bgDresscode: "assets/images/bg-dresscode.jpg",
@@ -307,20 +307,18 @@ const DataStore = {
       }
       const parsed = JSON.parse(stored);
 
-      // Check if stored data is legacy / outdated
-      const isLegacy = !parsed.dataVersion ||
-                       parsed.dataVersion !== CURRENT_DATA_VERSION ||
-                       (parsed.general && parsed.general.groom && parsed.general.groom.fullName === 'Romeo') ||
-                       (parsed.general && parsed.general.brandName && parsed.general.brandName.includes('jsambac'));
+      // Check only if it has old 'Romeo' dummy data from previous templates
+      const isOldRomeo = (parsed.general && parsed.general.groom && parsed.general.groom.fullName === 'Romeo') ||
+                         (parsed.general && parsed.general.brandName && parsed.general.brandName.includes('jsambac'));
 
-      if (isLegacy) {
+      if (isOldRomeo) {
         localStorage.removeItem('wedding_invitation_tema20_data');
         const fresh = JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA));
         this.save(fresh);
         return fresh;
       }
 
-      // Deep merge with defaults to avoid missing properties if schema upgraded
+      // Deep merge with defaults to avoid missing properties if schema upgraded (user saved data takes priority)
       const merged = this._deepMerge(JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA)), parsed);
 
       // Ensure particles object exists
@@ -330,10 +328,6 @@ const DataStore = {
         });
       }
 
-      // Ensure audio url points to the user's mp3 if still default or old
-      if (!merged.media.audio || !merged.media.audio.url || merged.media.audio.url.includes('pixabay')) {
-        merged.media.audio = DEFAULT_INVITATION_DATA.media.audio;
-      }
       return merged;
     } catch (e) {
       console.error('Error loading DataStore, using defaults', e);
@@ -394,7 +388,7 @@ const DataStore = {
   },
 
   /**
-   * Load remote data.json file from server (for guests on any device)
+   * Load remote data.json file from server (for first-time guests on any device)
    */
   async loadRemoteData() {
     try {
@@ -402,12 +396,13 @@ const DataStore = {
       if (response.ok) {
         const remoteData = await response.json();
         if (remoteData && remoteData.general) {
-          // Check if remote data has content
-          const localData = this.get();
-          // Merge remote data with local schema
-          const merged = this._deepMerge(localData, remoteData);
-          this.save(merged);
-          return merged;
+          const localStored = localStorage.getItem(STORAGE_KEY);
+          // Only populate if local storage is not yet set
+          if (!localStored) {
+            const merged = this._deepMerge(JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA)), remoteData);
+            this.save(merged);
+            return merged;
+          }
         }
       }
     } catch (err) {

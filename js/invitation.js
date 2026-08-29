@@ -364,10 +364,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroMainEl && data.media.heroMain) heroMainEl.src = data.media.heroMain;
     const heroC1 = document.getElementById('hero-c1');
     if (heroC1 && data.media.heroCouple1) heroC1.src = data.media.heroCouple1;
-    const heroC2 = document.getElementById('hero-c2');
-    if (heroC2 && data.media.heroCouple2) heroC2.src = data.media.heroCouple2;
     const heroC3 = document.getElementById('hero-c3');
-    if (heroC3 && data.media.heroCouple3) heroC3.src = data.media.heroCouple3;
+    if (heroC3) heroC3.src = data.media.heroCouple3 || data.general.groom.photo || 'assets/images/hero-couple-1.jpg';
+    const heroC2 = document.getElementById('hero-c2');
+    if (heroC2) heroC2.src = data.media.heroCouple2 || data.general.bride.photo || 'assets/images/hero-couple-2.jpg';
     const heroC4 = document.getElementById('hero-c4');
     if (heroC4 && data.media.heroCouple4) heroC4.src = data.media.heroCouple4;
 
