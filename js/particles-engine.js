@@ -25,23 +25,28 @@
   const SIZE_MAP = { small: 0.7, medium: 1.0, large: 1.5 };
 
   function init(canvasElement, config, themePrimaryColor) {
-    canvas = canvasElement || document.getElementById('particle-canvas');
-    if (!canvas) return;
-    ctx = canvas.getContext('2d');
+    try {
+      canvas = canvasElement || document.getElementById('particle-canvas');
+      if (!canvas || typeof canvas.getContext !== 'function') return;
+      ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-    if (config) {
-      if (typeof config === 'string') {
-        currentConfig.type = config;
-      } else {
-        currentConfig = Object.assign({}, currentConfig, config);
+      if (config) {
+        if (typeof config === 'string') {
+          currentConfig.type = config;
+        } else {
+          currentConfig = Object.assign({}, currentConfig, config);
+        }
       }
+
+      resize();
+      window.removeEventListener('resize', resize);
+      window.addEventListener('resize', resize);
+
+      restart(themePrimaryColor);
+    } catch (e) {
+      console.warn('ParticlesEngine init error:', e);
     }
-
-    resize();
-    window.removeEventListener('resize', resize);
-    window.addEventListener('resize', resize);
-
-    restart(themePrimaryColor);
   }
 
   function resize() {

@@ -43,37 +43,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 
-  // Unregister any stale Service Workers on mobile browsers
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(regs => {
-      regs.forEach(r => r.unregister());
-    }).catch(() => {});
-  }
-
-
-  // Initialize Falling Particles Engine
-  if (window.ParticlesEngine) {
-    const canvasEl = document.getElementById('particle-canvas');
-    const pConf = (appData.appearance && appData.appearance.particles) ? appData.appearance.particles : { type: 'flowers' };
-    const primaryColor = (appData.appearance && appData.appearance.primaryColor) ? appData.appearance.primaryColor : '#d4af37';
-    window.ParticlesEngine.init(canvasEl, pConf, primaryColor);
-  }
-
-  // Apply initial theme appearance & render all data
-  applyAppearanceStyles(appData);
-  renderInvitationData(appData, guestParams);
-  initStickerPicker();
-  initAudio(appData);
-  startCountdown(appData.event.countdownDate);
-  initLightbox(appData);
-  initScrollSpy();
-  initCalendarButton(appData);
-
-  // Loading page removal
-  setTimeout(() => {
+  // Loading page removal helper - GUARANTEED
+  function removeLoadingScreen() {
     const loader = document.getElementById('loadingpage');
-    if (loader) loader.classList.add('loaded');
-  }, 900);
+    if (loader) {
+      loader.classList.add('loaded');
+      setTimeout(() => {
+        if (loader) {
+          loader.style.display = 'none';
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          loader.style.pointerEvents = 'none';
+        }
+      }, 600);
+    }
+  }
+
+  // Remove loading screen immediately or after short delay
+  setTimeout(removeLoadingScreen, 400);
+  window.addEventListener('load', removeLoadingScreen);
+
+  // Initialize Falling Particles Engine safely
+  try {
+    if (window.ParticlesEngine) {
+      const canvasEl = document.getElementById('particle-canvas');
+      const pConf = (appData.appearance && appData.appearance.particles) ? appData.appearance.particles : { type: 'flowers' };
+      const primaryColor = (appData.appearance && appData.appearance.primaryColor) ? appData.appearance.primaryColor : '#d4af37';
+      window.ParticlesEngine.init(canvasEl, pConf, primaryColor);
+    }
+  } catch (pErr) {
+    console.warn('ParticlesEngine init skipped:', pErr);
+  }
+
+  // Apply initial theme appearance & render all data safely
+  try {
+    applyAppearanceStyles(appData);
+    renderInvitationData(appData, guestParams);
+    initStickerPicker();
+    initAudio(appData);
+    startCountdown(appData.event.countdownDate);
+    initLightbox(appData);
+    initScrollSpy();
+    initCalendarButton(appData);
+  } catch (initErr) {
+    console.error('Initialization error:', initErr);
+  } finally {
+    removeLoadingScreen();
+  }
 
   /* ===================================================================
      REAL-TIME SYNC LISTENERS (CustomEvent, Cross-Tab Storage, PostMessage)

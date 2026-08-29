@@ -30,28 +30,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const unifiedDrawer = document.getElementById('unified-admin-drawer');
   const iframePreview = document.getElementById('preview-iframe');
 
-  // Initialize UI & Populate All Forms
-  initAdminAuth();
-  initTabs();
-  initUnifiedDrawer();
-  initDeviceSwitcher();
-  populateFormFields(appData);
-  renderThemePresets();
-  renderSectionToggles(appData);
-  renderStoryManager(appData);
-  renderGalleryManager(appData);
-  renderDresscodeManager(appData);
-  renderBankManager(appData);
-  renderTurutMengundangManager(appData);
-  renderProkesManager(appData);
-  renderGuestDatabase(appData);
-  renderWishesManager(appData);
-  updateDashboardStats(appData);
-  initWhatsAppGenerator(appData);
-  initBackupRestore();
-  initRealtimeLiveSync();
-  initAdminAudioTester();
-  initParticleControls(appData);
+  // Initialize UI & Populate All Forms safely
+  try {
+    initAdminAuth();
+    initTabs();
+    initUnifiedDrawer();
+    initDeviceSwitcher();
+    populateFormFields(appData);
+    renderThemePresets();
+    renderSectionToggles(appData);
+    renderStoryManager(appData);
+    renderGalleryManager(appData);
+    renderDresscodeManager(appData);
+    renderBankManager(appData);
+    renderTurutMengundangManager(appData);
+    renderProkesManager(appData);
+    renderGuestDatabase(appData);
+    renderWishesManager(appData);
+    updateDashboardStats(appData);
+    initWhatsAppGenerator(appData);
+    initBackupRestore();
+    initRealtimeLiveSync();
+    initAdminAudioTester();
+    initParticleControls(appData);
+  } catch (adminErr) {
+    console.error('Admin initialization error:', adminErr);
+  }
 
   // Save All Buttons
   document.querySelectorAll('#btn-save-all').forEach(btn => {
