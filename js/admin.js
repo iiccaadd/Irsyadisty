@@ -1126,14 +1126,15 @@ Terima kasih.`;
     });
 
     document.querySelectorAll('#new-gallery-photo-file').forEach(photoFileInput => {
-      photoFileInput.onchange = (e) => {
+      photoFileInput.onchange = async (e) => {
         const file = e.target.files[0];
         if (file) {
-          const reader = new FileReader();
-          reader.onload = (re) => {
-            document.querySelectorAll('#new-gallery-photo-url').forEach(u => u.value = re.target.result);
-          };
-          reader.readAsDataURL(file);
+          showAdminToast('Mengompresi foto galeri...');
+          const compressed = await compressImage(file, 1080, 0.85);
+          if (compressed) {
+            document.querySelectorAll('#new-gallery-photo-url').forEach(u => u.value = compressed);
+            showAdminToast('Foto galeri siap ditambahkan!');
+          }
         }
       };
     });
