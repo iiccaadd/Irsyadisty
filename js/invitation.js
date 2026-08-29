@@ -43,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 
+  // Unregister any stale Service Workers on mobile browsers
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(r => r.unregister());
+    }).catch(() => {});
+  }
+
+
   // Initialize Falling Particles Engine
   if (window.ParticlesEngine) {
     const canvasEl = document.getElementById('particle-canvas');

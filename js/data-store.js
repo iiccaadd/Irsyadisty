@@ -5,8 +5,10 @@
  */
 
 const STORAGE_KEY = 'wedding_invitation_irsyad_adisty_data';
+const CURRENT_DATA_VERSION = '2026.08.29.v3';
 
 const DEFAULT_INVITATION_DATA = {
+  dataVersion: CURRENT_DATA_VERSION,
   general: {
     siteTitle: "The Wedding of Irsyad & Adisty",
     coupleNameShort: "Irsyad & Adisty",
@@ -298,13 +300,26 @@ const DataStore = {
     try {
       let stored = localStorage.getItem(STORAGE_KEY);
       if (!stored) {
-        stored = localStorage.getItem('wedding_invitation_tema20_data');
-      }
-      if (!stored) {
+        // Clean legacy key if any
+        localStorage.removeItem('wedding_invitation_tema20_data');
         this.save(DEFAULT_INVITATION_DATA);
         return JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA));
       }
       const parsed = JSON.parse(stored);
+
+      // Check if stored data is legacy / outdated
+      const isLegacy = !parsed.dataVersion ||
+                       parsed.dataVersion !== CURRENT_DATA_VERSION ||
+                       (parsed.general && parsed.general.groom && parsed.general.groom.fullName === 'Romeo') ||
+                       (parsed.general && parsed.general.brandName && parsed.general.brandName.includes('jsambac'));
+
+      if (isLegacy) {
+        localStorage.removeItem('wedding_invitation_tema20_data');
+        const fresh = JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA));
+        this.save(fresh);
+        return fresh;
+      }
+
       // Deep merge with defaults to avoid missing properties if schema upgraded
       const merged = this._deepMerge(JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA)), parsed);
 
