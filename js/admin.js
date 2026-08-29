@@ -403,8 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Media fields & previews
-    bindImageField('cover-image', data.media.coverImage);
-    bindImageField('cover-image-admin', data.media.coverImage);
+    bindImageField('cover-image-url', data.media.coverImage || 'assets/images/hero-couple-1.jpg');
+    bindImageField('cover-image', data.media.coverImage || 'assets/images/hero-couple-1.jpg');
+    bindImageField('cover-image-admin', data.media.coverImage || 'assets/images/hero-couple-1.jpg');
     bindImageField('hero-main-image', data.media.heroMain);
     bindImageField('hero-couple-1', data.media.heroCouple1);
     bindImageField('hero-couple-2', data.media.heroCouple2);
@@ -1419,7 +1420,7 @@ Terima kasih.`;
     data.streaming.buttonText = getVal('streaming-btn-text', data.streaming.buttonText);
 
     // Media
-    data.media.coverImage = getVal('cover-image', data.media.coverImage);
+    data.media.coverImage = getVal('cover-image-url', getVal('cover-image-admin', getVal('cover-image', data.media.coverImage)));
     data.media.heroMain = getVal('hero-main-image', data.media.heroMain);
     data.media.heroCouple1 = getVal('hero-couple-1', data.media.heroCouple1);
     data.media.heroCouple2 = getVal('hero-couple-2', data.media.heroCouple2);

@@ -283,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coverGuestEl) coverGuestEl.textContent = guest.name;
     const coverDearEl = document.getElementById('cover-dear-prefix');
     if (coverDearEl) coverDearEl.textContent = data.general.coverToPrefix || 'Dear';
-    const coverImgEl = document.getElementById('cover-image');
-    if (coverImgEl && data.media.coverImage) coverImgEl.src = data.media.coverImage;
+    const coverImgEl = document.getElementById('cover-modal-img') || document.getElementById('cover-image');
+    if (coverImgEl) coverImgEl.src = data.media.coverImage || 'assets/images/hero-couple-1.jpg';
     const coverCoupleName = document.getElementById('cover-couple-name');
     if (coverCoupleName) coverCoupleName.textContent = data.general.coupleNameShort;
 

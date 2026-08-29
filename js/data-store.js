@@ -139,7 +139,7 @@ const DEFAULT_INVITATION_DATA = {
     ]
   },
   media: {
-    coverImage: "assets/images/cover.jpg",
+    coverImage: "assets/images/hero-couple-1.jpg",
     heroMain: "assets/images/hero-main.jpg",
     heroCouple1: "assets/images/hero-couple-1.jpg",
     heroCouple2: "assets/images/hero-couple-2.jpg",
@@ -326,6 +326,11 @@ const DataStore = {
         merged.appearance.particles = Object.assign({}, DEFAULT_INVITATION_DATA.appearance.particles, {
           type: merged.appearance.fallingParticles || 'flowers'
         });
+      }
+
+      // Auto-upgrade legacy cover.jpg if still referring to old dummy template cover
+      if (merged.media && (!merged.media.coverImage || merged.media.coverImage === 'assets/images/cover.jpg')) {
+        merged.media.coverImage = DEFAULT_INVITATION_DATA.media.coverImage;
       }
 
       return merged;
