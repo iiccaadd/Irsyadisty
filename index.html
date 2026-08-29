@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Wedding of Irsyad & Adisty</title>
+  
+  <!-- Favicon & Icons -->
+  <link rel="shortcut icon" href="assets/images/cover.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/invitation.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- Particle Animation Canvas (Customizable Falling Shapes) -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- ===================================================================
+       1. LOADING SCREEN (Coffee Animation - Original Replica)
+       =================================================================== -->
+  <div id="loadingpage">
+    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%;">
+      <div class="coffee">
+        <div></div><div></div><div></div>
+      </div>
+      <div class="plate"></div>
+      <div class="typing-loading">LOADING...</div>
+      <div style="margin-top: 15px; font-size: 11pt; color: #6c3333;">The Wedding of</div>
+      <div style="color: #6c3333; font-size: 15pt; font-weight: bold; font-family: 'Alata', sans-serif;">
+        <span id="host-name">Irsyad & Adisty</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       2. COVER MODAL / OPENING SCREEN
+       =================================================================== -->
+  <div class="cover-overlay" id="cover-overlay">
+    <div class="cover-card">
+      <div class="cover-header">The Wedding Of</div>
+      <h1 class="cover-title" id="cover-couple-name">Irsyad & Adisty</h1>
+      
+      <div class="cover-img-box">
+        <img id="cover-image" src="assets/images/cover.jpg" alt="Wedding Cover">
+      </div>
+
+      <div class="cover-recipient-box">
+        <div class="cover-dear" id="cover-dear-prefix">Dear</div>
+        <div class="cover-guest-name" id="cover-guest-name">Penerima Undangan</div>
+        <!-- Dynamic guest badges (VIP, Sesi, Meja) -->
+        <div class="cover-guest-meta" id="cover-guest-meta"></div>
+      </div>
+
+      <button type="button" class="btn-open-invitation" id="btn-open-inv">
+        <i class="fas fa-book-open"></i>
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Fixed background backdrop -->
+  <div id="infuwr"></div>
+
+  <!-- ===================================================================
+       3. MAIN INVITATION CONTENT
+       =================================================================== -->
+  <main class="main-wrapper" id="invitation-main">
+    
+    <!-- Section 1: Hero Cards (4-5 Foto Berderet Kebawah) -->
+    <section class="section-invitation hero-section" id="section-home">
+      
+      <!-- Card 1: Photostrip Bookmark + QS. Ar-Rum : 21 (Exact Reference Match) -->
+      <div class="theme-hero-card do-animate membesar">
+        <img src="assets/images/hero-main.jpg" alt="Wedding Photostrip & Verse" id="hero-main-img">
+      </div>
+
+      <!-- Card 2: GETTING WE ARE MARRIED -->
+      <div class="theme-hero-card do-animate membesar">
+        <img src="assets/images/hero-couple-1.jpg" alt="Getting Married" id="hero-c1">
+      </div>
+
+      <!-- Card 3: Mempelai Pria (The Groom) -->
+      <div class="theme-hero-card do-animate kekiri">
+        <div class="card-top-tag">
+          <span class="role-badge"><i class="fas fa-male"></i> MEMPELAI PRIA</span>
+          <h3 class="role-name" id="groom-header-name">Irsyad</h3>
+        </div>
+        <img src="assets/images/hero-couple-3.jpg" alt="Mempelai Pria (The Groom)" id="hero-c3">
+      </div>
+
+      <!-- Card 4: Mempelai Wanita (The Bride) -->
+      <div class="theme-hero-card do-animate kekanan">
+        <div class="card-top-tag">
+          <span class="role-badge"><i class="fas fa-female"></i> MEMPELAI WANITA</span>
+          <h3 class="role-name" id="bride-header-name">Adisty</h3>
+        </div>
+        <img src="assets/images/hero-couple-2.jpg" alt="Mempelai Wanita (The Bride)" id="hero-c2">
+      </div>
+
+      <!-- Card 5: Love Story Beginning (Our Forever Begins) -->
+      <div class="theme-hero-card do-animate membesar">
+        <img src="assets/images/hero-couple-4.jpg" alt="Love Story Card" id="hero-c4">
+      </div>
+
+    </section>
+
+    <!-- Section 2: Love Story / Kisah Cinta -->
+    <section class="section-invitation" id="section-story">
+      <div class="section-subtitle" id="story-subtitle">Bagaimana Kisah Kami Dimulai</div>
+      <h2 class="section-title" id="story-title">Our Love Story</h2>
+      <div class="timeline-container" id="story-timeline-container">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Section 3: Location, Event & Live Countdown -->
+    <section class="section-invitation" id="section-event">
+      <div class="sticky-card" id="sticky-card-location" style="background-image: url('assets/images/bg-location.png');">
+        <div class="sticky-card-overlay">
+          <div class="section-subtitle">Save The Date</div>
+          <h2 class="section-title">Location & Event</h2>
+
+          <!-- Event 1: Akad Nikah -->
+          <div class="event-card" id="card-akad">
+            <span class="event-badge" id="akad-session-title">Akad Nikah</span>
+            <div style="font-size: 16px; font-weight: bold; color: var(--accent-gold);" id="akad-date">Selasa, 18 Mei 2027</div>
+            <div style="font-size: 13px; color: #ddd; margin-bottom: 8px;" id="akad-time">08:00 - 10:00 WIB</div>
+            <div class="event-venue" id="akad-venue">The Trans Luxury Hotel</div>
+            <div class="event-address" id="akad-address">📍 Jl. Gatot Subroto No.289, Cibangkong, Kec. Batununggal, Kota Bandung, Jawa Barat 40273</div>
+            <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:12px;">
+              <a href="https://maps.google.com/?q=The+Trans+Luxury+Hotel+Bandung" target="_blank" class="btn-gmaps" id="akad-gmaps-link">
+                <i class="fas fa-map-marked-alt"></i> Petunjuk Arah (Maps)
+              </a>
+            </div>
+          </div>
+
+          <!-- Event 2: Resepsi Pernikahan -->
+          <div class="event-card" id="card-resepsi">
+            <span class="event-badge" id="resepsi-session-title">Resepsi Pernikahan</span>
+            <div style="font-size: 16px; font-weight: bold; color: var(--accent-gold);" id="resepsi-date">Selasa, 18 Mei 2027</div>
+            <div style="font-size: 13px; color: #ddd; margin-bottom: 8px;" id="resepsi-time">11:00 - 14:00 WIB</div>
+            <div class="event-venue" id="resepsi-venue">The Trans Luxury Hotel (Grand Ballroom)</div>
+            <div class="event-address" id="resepsi-address">📍 Jl. Gatot Subroto No.289, Cibangkong, Kec. Batununggal, Kota Bandung, Jawa Barat 40273</div>
+            <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:12px;">
+              <a href="https://maps.google.com/?q=The+Trans+Luxury+Hotel+Bandung" target="_blank" class="btn-gmaps" id="resepsi-gmaps-link">
+                <i class="fas fa-map-marked-alt"></i> Petunjuk Arah (Maps)
+              </a>
+            </div>
+          </div>
+
+          <!-- Live Countdown Timer -->
+          <div class="generate-countdown" id="countdown-box">
+            <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #ccc; margin-bottom: 10px;">Menuju Hari Bahagia</div>
+            <div class="countdown">
+              <div class="counter">
+                <div id="cd-days">00</div>
+                <span>Hari</span>
+              </div>
+              <div class="counter">
+                <div id="cd-hours">00</div>
+                <span>Jam</span>
+              </div>
+              <div class="counter">
+                <div id="cd-minutes">00</div>
+                <span>Menit</span>
+              </div>
+              <div class="counter">
+                <div id="cd-seconds">00</div>
+                <span>Detik</span>
+              </div>
+            </div>
+
+            <!-- Save to Google Calendar -->
+            <div style="margin-top: 18px;">
+              <button type="button" class="btn-gmaps" id="btn-save-calendar" style="background: var(--primary-color); color: #000; font-size: 13px; padding: 8px 20px; cursor: pointer;">
+                <i class="far fa-calendar-plus"></i> Simpan ke Google Calendar
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Live Streaming (Virtual Wedding) -->
+    <section class="section-invitation" id="section-streaming">
+      <div class="section-subtitle" id="streaming-subtitle-el">Virtual Wedding</div>
+      <h2 class="section-title" id="streaming-title-el">Live Streaming</h2>
+      <p style="font-size: 13px; color: #bbb; max-width: 440px; margin: 0 auto 16px;" id="streaming-description">
+        Bagi keluarga dan sahabat yang belum dapat hadir secara langsung, Anda dapat menyaksikan siaran langsung pernikahan kami secara daring.
+      </p>
+      
+      <div class="streaming-video-box">
+        <iframe id="streaming-iframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Live Streaming" allowfullscreen></iframe>
+      </div>
+
+      <div>
+        <a href="#" target="_blank" class="btn-streaming" id="streaming-btn-link">
+          <i class="fab fa-youtube"></i> Tonton Live Streaming
+        </a>
+      </div>
+    </section>
+
+    <!-- Section 5: Dress Code -->
+    <section class="section-invitation" id="section-dresscode">
+      <div class="sticky-card" id="sticky-card-dresscode" style="background-image: url('assets/images/bg-dresscode.jpg');">
+        <div class="sticky-card-overlay">
+          <h2 class="section-title">Dress Code</h2>
+          <p style="color: #eee; font-size: 14px; max-width: 420px; margin: 0 auto 20px;" id="dresscode-description">
+            We kindly encourage our guests to wear your best & comfiest outfit.
+          </p>
+          <div class="dresscode-palette" id="dresscode-palette">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Photo Gallery & Lightbox -->
+    <section class="section-invitation" id="section-gallery">
+      <div class="section-subtitle">Our Sweet Moments</div>
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Section 7: Turut Mengundang -->
+    <section class="section-invitation" id="section-turut-mengundang">
+      <div class="turut-mengundang-box">
+        <h2 class="section-title" style="font-size:30px;" id="turut-mengundang-title">Turut Mengundang</h2>
+        <div class="families-list" id="turut-mengundang-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Wedding Gift / Digital Envelope -->
+    <section class="section-invitation" id="section-gift">
+      <div class="sticky-card" id="sticky-card-gift" style="background-image: url('assets/images/bg-gift.png');">
+        <div class="sticky-card-overlay">
+          <div class="section-subtitle">Tanda Kasih</div>
+          <h2 class="section-title">Wedding Gift</h2>
+          <p style="font-size: 13px; color: #ddd; margin-bottom: 24px; line-height: 1.6;">
+            Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara digital atau fisik.
+          </p>
+
+          <!-- Bank & E-Wallet Accounts List -->
+          <div id="bank-accounts-list">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Physical Gift Box (Optional) -->
+          <div id="physical-gift-box" style="display:none; margin-top: 20px; background: rgba(0,0,0,0.85); padding: 18px; border-radius: 12px; border: 1px dashed rgba(255,255,255,0.2); text-align: left;">
+            <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 6px;"><i class="fas fa-gift"></i> Kirim Kado Fisik:</div>
+            <div id="phys-recipient-name" style="font-weight: 600; color: #fff;">Irsyad & Adisty</div>
+            <div id="phys-recipient-address" style="font-size: 13px; color: #ccc; margin: 4px 0;">Jl. Gatot Subroto No.289, Bandung</div>
+            <div id="phys-recipient-phone" style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Telp/WA: 085712345678</div>
+            <button type="button" class="btn-copy-account" id="btn-copy-phys-address">
+              <i class="far fa-copy"></i> Salin Alamat Pengiriman
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Protokol Kesehatan -->
+    <section class="section-invitation" id="section-prokes">
+      <div class="section-subtitle">Himbauan</div>
+      <h2 class="section-title" style="font-size:32px;">Protokol Kesehatan</h2>
+      <p style="font-size: 13px; color: #bbb; max-width: 440px; margin: 0 auto;" id="prokes-subtitle">
+        Demi kenyamanan dan keselamatan bersama, mohon untuk tetap mematuhi protokol kesehatan selama acara berlangsung.
+      </p>
+      <div class="prokes-grid" id="prokes-grid">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Section 10: RSVP & Guestbook (Share Your Blessing) -->
+    <section class="section-invitation" id="section-wishes">
+      <div class="section-subtitle">Wishes & Prayers</div>
+      <h2 class="section-title">Share Your Blessing</h2>
+      <p style="font-size: 13px; color: #bbb; margin-bottom: 25px;">
+        Please let us know if you’ll be able to celebrate with us. We would also appreciate your warm wishes and blessings.
+      </p>
+
+      <!-- RSVP Form -->
+      <div class="rsvp-form-container">
+        <form id="rsvp-form">
+          <div class="form-group">
+            <label class="form-label" for="input-guest-name">Nama Lengkap</label>
+            <input type="text" id="input-guest-name" class="form-input" placeholder="Masukkan nama Anda" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Konfirmasi Kehadiran</label>
+            <div class="presence-options">
+              <div class="presence-btn active" data-status="hadir"><i class="fas fa-check-circle"></i> Hadir</div>
+              <div class="presence-btn" data-status="tidak"><i class="fas fa-times-circle"></i> Tidak Hadir</div>
+              <div class="presence-btn" data-status="ragu"><i class="fas fa-question-circle"></i> Masih Ragu</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-pax">Jumlah Tamu</label>
+            <select id="input-pax" class="form-select">
+              <option value="1">1 Orang</option>
+              <option value="2" selected>2 Orang</option>
+              <option value="3">3 Orang</option>
+              <option value="4">4 Orang</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-wishes">Ucapan & Doa</label>
+            <textarea id="input-wishes" class="form-textarea" rows="3" placeholder="Tuliskan ucapan dan doa terbaik untuk kedua mempelai..." required></textarea>
+          </div>
+
+          <!-- 34-Sticker Selector -->
+          <div class="form-group">
+            <label class="form-label">Pilih Stiker Animasi 😍</label>
+            <div class="sticker-preview-box" id="sticker-picker-toggle">
+              <img src="assets/stickers/sticker001.gif" alt="Selected Sticker" id="selected-sticker-preview" class="sticker-preview-img">
+              <span style="font-size: 13px; color: #ccc;">Klik untuk memilih stiker lucu...</span>
+              <i class="fas fa-chevron-down" style="margin-left: auto; color: var(--primary-color);"></i>
+            </div>
+            <div class="sticker-grid-drawer" id="sticker-drawer">
+              <!-- 34 Stickers populated dynamically -->
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-wish">
+            <i class="fas fa-paper-plane"></i> Kirim Ucapan & RSVP
+          </button>
+        </form>
+      </div>
+
+      <!-- Guestbook Feed -->
+      <div class="wishes-feed" id="wishes-feed">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Footer Watermark -->
+    <footer class="footer-watermark">
+      <div>The Wedding of <span id="brand-name-text">Irsyad & Adisty</span></div>
+      <div style="font-size: 11px; margin-top: 6px; color: #555;">Forever & Always &bull; All Rights Reserved</div>
+    </footer>
+
+  </main>
+
+  <!-- ===================================================================
+       4. FLOATING CONTROLS & NAVIGATION
+       =================================================================== -->
+  <!-- Top Unified Action Button: Open Integrated Admin & Editor -->
+  <button type="button" class="btn-unified-toggle" id="btn-unified-admin-open">
+    <i class="fas fa-sliders-h"></i> <span>Pengaturan & Editor</span>
+  </button>
+
+  <div class="floating-controls">
+    <!-- Music Player Button -->
+    <button class="float-btn" id="btn-music-toggle" title="Toggle Music">
+      <i class="fas fa-compact-disc"></i>
+    </button>
+    
+    <!-- Auto Scroll Button -->
+    <button class="float-btn" id="btn-auto-scroll" title="Auto Scroll">
+      <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button class="float-btn" id="btn-to-top" title="Back to Top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Gear button opening unified drawer directly -->
+    <button type="button" class="float-btn" id="btn-admin-gear" title="Buka Pengaturan & Editor" style="background: var(--primary-color); color: #000;">
+      <i class="fas fa-cog"></i>
+    </button>
+  </div>
+
+  <!-- Bottom Nav Bar with ScrollSpy -->
+  <nav class="bottom-nav-bar" id="bottom-nav">
+    <a href="#section-home" class="bottom-nav-link active">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#section-story" class="bottom-nav-link">
+      <i class="fas fa-heart"></i>
+      <span>Cerita</span>
+    </a>
+    <a href="#section-event" class="bottom-nav-link">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Acara</span>
+    </a>
+    <a href="#section-gallery" class="bottom-nav-link">
+      <i class="fas fa-images"></i>
+      <span>Galeri</span>
+    </a>
+    <a href="#section-gift" class="bottom-nav-link">
+      <i class="fas fa-gift"></i>
+      <span>Kado</span>
+    </a>
+    <a href="#section-wishes" class="bottom-nav-link">
+      <i class="fas fa-comments"></i>
+      <span>Ucapan</span>
+    </a>
+  </nav>
+
+  <!-- ===================================================================
+       5. FULLSCREEN LIGHTBOX MODAL
+       =================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-img-wrapper">
+      <img src="" alt="Zoomed Foto" class="lightbox-img" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       6. INTEGRATED UNIFIED ADMIN & LIVE EDITOR DRAWER
+       (Portal Utama & Pengaturan Jadi Satu Kesatuan)
+       =================================================================== -->
+  <div class="unified-admin-drawer" id="unified-admin-drawer">
+    
+    <!-- Drawer Header -->
+    <div class="unified-admin-header">
+      <div class="unified-brand-title">
+        <i class="fas fa-gem"></i>
+        <span>Pengaturan Tema & Tamu</span>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button type="button" class="admin-btn btn-primary btn-sm" id="btn-save-all">
+          <i class="fas fa-save"></i> Simpan
+        </button>
+        <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-close-unified-drawer" title="Tutup Editor & Lihat Tampilan Tamu">
+          <i class="fas fa-eye"></i> Lihat Tamu
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Body (Sidebar Tabs + Forms Content) -->
+    <div class="unified-admin-body">
+      
+      <!-- Side Tab Navigation -->
+      <nav class="unified-nav-sidebar">
+        <a class="unified-nav-link active" data-tab="dashboard">
+          <i class="fas fa-chart-pie"></i> <span>Dashboard</span>
+        </a>
+        <a class="unified-nav-link" data-tab="animasi-guguran">
+          <i class="fas fa-magic"></i> <span>Animasi Guguran</span>
+        </a>
+        <a class="unified-nav-link" data-tab="tema-layout">
+          <i class="fas fa-palette"></i> <span>Tema & Warna</span>
+        </a>
+        <a class="unified-nav-link" data-tab="sections-toggle">
+          <i class="fas fa-toggle-on"></i> <span>On/Off Bagian</span>
+        </a>
+        <a class="unified-nav-link" data-tab="mempelai">
+          <i class="fas fa-heart"></i> <span>Mempelai & Info</span>
+        </a>
+        <a class="unified-nav-link" data-tab="story">
+          <i class="fas fa-history"></i> <span>Love Story</span>
+        </a>
+        <a class="unified-nav-link" data-tab="acara">
+          <i class="fas fa-calendar-alt"></i> <span>Waktu & Lokasi</span>
+        </a>
+        <a class="unified-nav-link" data-tab="streaming">
+          <i class="fas fa-video"></i> <span>Live Streaming</span>
+        </a>
+        <a class="unified-nav-link" data-tab="media">
+          <i class="fas fa-photo-video"></i> <span>Media & Galeri</span>
+        </a>
+        <a class="unified-nav-link" data-tab="audio">
+          <i class="fas fa-music"></i> <span>Musik Latar</span>
+        </a>
+        <a class="unified-nav-link" data-tab="dresscode">
+          <i class="fas fa-tshirt"></i> <span>Dress Code</span>
+        </a>
+        <a class="unified-nav-link" data-tab="rekening">
+          <i class="fas fa-wallet"></i> <span>Amplop & Bank</span>
+        </a>
+        <a class="unified-nav-link" data-tab="turut-prokes">
+          <i class="fas fa-users-cog"></i> <span>Turut & Prokes</span>
+        </a>
+        <a class="unified-nav-link" data-tab="generator">
+          <i class="fab fa-whatsapp"></i> <span>Database & WA</span>
+        </a>
+        <a class="unified-nav-link" data-tab="buku-tamu">
+          <i class="fas fa-book-open"></i> <span>Buku Tamu RSVP</span>
+        </a>
+        <a class="unified-nav-link" data-tab="backup-restore">
+          <i class="fas fa-database"></i> <span>Backup / Restore</span>
+        </a>
+      </nav>
+
+      <!-- Forms Content Area -->
+      <div class="unified-content-area">
+        
+        <!-- TAB: DASHBOARD -->
+        <div class="tab-pane active" id="tab-dashboard">
+          <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom:16px;">
+            <div class="stat-box" style="padding:10px;">
+              <div class="stat-icon primary" style="width:36px; height:36px; font-size:16px;"><i class="fas fa-address-book"></i></div>
+              <div>
+                <div class="stat-val" style="font-size:18px;" id="stat-total-guests">0</div>
+                <div class="stat-lbl" style="font-size:10px;">Tamu Terdaftar</div>
+              </div>
+            </div>
+            <div class="stat-box" style="padding:10px;">
+              <div class="stat-icon success" style="width:36px; height:36px; font-size:16px;"><i class="fas fa-user-check"></i></div>
+              <div>
+                <div class="stat-val" style="font-size:18px;" id="stat-hadir">0</div>
+                <div class="stat-lbl" style="font-size:10px;">Konfirmasi Hadir</div>
+              </div>
+            </div>
+            <div class="stat-box" style="padding:10px;">
+              <div class="stat-icon danger" style="width:36px; height:36px; font-size:16px;"><i class="fas fa-user-times"></i></div>
+              <div>
+                <div class="stat-val" style="font-size:18px;" id="stat-tidak">0</div>
+                <div class="stat-lbl" style="font-size:10px;">Tidak Hadir</div>
+              </div>
+            </div>
+            <div class="stat-box" style="padding:10px;">
+              <div class="stat-icon warning" style="width:36px; height:36px; font-size:16px;"><i class="fas fa-users"></i></div>
+              <div>
+                <div class="stat-val" style="font-size:18px;" id="stat-total-pax">0</div>
+                <div class="stat-lbl" style="font-size:10px;">Estimasi Pax</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card" style="padding:14px; margin-bottom:16px;">
+            <div class="card-title" style="font-size:14px; margin-bottom:8px;"><i class="fas fa-check-double"></i> Editor Live Terpadu</div>
+            <p style="font-size:12px; color:#bbb; line-height:1.6;">
+              Semua perubahan yang Anda buat di menu sebelah kiri akan <strong>langsung terlihat seketika secara real-time (Live WYSIWYG)</strong> pada halaman undangan.
+            </p>
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="admin-btn btn-primary btn-sm" onclick="document.querySelector('[data-tab=animasi-guguran]').click()"><i class="fas fa-magic"></i> Atur Animasi Guguran</button>
+              <button type="button" class="admin-btn btn-secondary btn-sm" onclick="document.querySelector('[data-tab=generator]').click()"><i class="fab fa-whatsapp"></i> Database Tamu & Link</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: ANIMASI BERGUGURAN (CUSTOMIZABLE PARTICLES ENGINE) -->
+        <div class="tab-pane" id="tab-animasi-guguran">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-magic"></i> Pengaturan Animasi Berguguran</div>
+            </div>
+            
+            <!-- Enable/Disable -->
+            <div class="form-group-admin" style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+              <input type="checkbox" id="particle-enable" style="width:18px; height:18px; cursor:pointer;" checked>
+              <label for="particle-enable" class="form-label-admin" style="margin-bottom:0; cursor:pointer;">Aktifkan Efek Animasi Berguguran</label>
+            </div>
+
+            <!-- Particle Type -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Pilihan Bentuk Partikel Berguguran</label>
+              <select id="particle-type" class="form-select-admin">
+                <option value="flowers">🌸 Kelopak Bunga (Mawar / Sakura Petals)</option>
+                <option value="leaves">🍃 Dedaunan Gugur Emas / Tropis (Autumn Leaves)</option>
+                <option value="snow">❄️ Butiran Salju Berkilau (Snowflakes)</option>
+                <option value="stars">✨ Kilauan Bintang & Cahaya Emas (Sparkles & Stars)</option>
+                <option value="hearts">💖 Hati Romantis Floating (Love Hearts)</option>
+                <option value="confetti">🎊 Konfeti Pesta Mewah (Luxury Confetti)</option>
+                <option value="none">🚫 Matikan Animasi (None)</option>
+              </select>
+            </div>
+
+            <!-- Speed -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Kecepatan Jatuh (Falling Speed)</label>
+              <select id="particle-speed" class="form-select-admin">
+                <option value="slow">🐢 Santai / Lambat (Slow Flow)</option>
+                <option value="medium" selected>⚡ Normal / Sedang (Natural Speed)</option>
+                <option value="fast">🚀 Cepat / Bersemangat (Fast Drift)</option>
+              </select>
+            </div>
+
+            <!-- Density / Quantity -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Kepadatan / Jumlah Partikel</label>
+              <select id="particle-density" class="form-select-admin">
+                <option value="low">🍃 Sedikit (18 Partikel - Minimalis)</option>
+                <option value="medium" selected>🌿 Sedang (36 Partikel - Elegan)</option>
+                <option value="high">🌳 Banyak (75 Partikel - Lebat & Ramai)</option>
+              </select>
+            </div>
+
+            <!-- Size -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Ukuran Partikel</label>
+              <select id="particle-size" class="form-select-admin">
+                <option value="small">🔹 Kecil (Halus)</option>
+                <option value="medium" selected>🔸 Sedang (Seimbang)</option>
+                <option value="large">🔷 Besar (Dramatis)</option>
+              </select>
+            </div>
+
+            <!-- Color Palette Mode -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Skema Warna Partikel</label>
+              <select id="particle-color-mode" class="form-select-admin">
+                <option value="auto">🎨 Otomatis (Mengikuti Warna Tema & Tipe Partikel)</option>
+                <option value="gold">👑 Emas Mewah (Gold Glitter)</option>
+                <option value="pink">🌸 Merah Muda (Romantic Pink/Rose)</option>
+                <option value="white">❄️ Putih Bersih (Snow White)</option>
+                <option value="custom">🎯 Kustom (Pilih Warna Sendiri)</option>
+              </select>
+            </div>
+
+            <!-- Custom Color Picker -->
+            <div class="form-group-admin" id="particle-custom-color-group">
+              <label class="form-label-admin">Warna Partikel Kustom</label>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <input type="color" id="particle-custom-color" value="#d4af37" style="width:40px; height:40px; border:none; border-radius:6px; cursor:pointer;">
+                <span style="font-size:12px; color:#aaa;">Pilih warna spesifik untuk efek guguran</span>
+              </div>
+            </div>
+
+            <!-- Wind Sway -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Goyangan Angin & Rotasi 3D</label>
+              <select id="particle-wind-sway" class="form-select-admin">
+                <option value="gentle">🍃 Ayunan Lembut (Gentle Breeze)</option>
+                <option value="moderate" selected>💨 Ayunan Sedang (Moderate Sway)</option>
+                <option value="dynamic">🌪️ Melayang Dinamis (Dynamic Flutter)</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB: TEMA, WARNA & FONT -->
+        <div class="tab-pane" id="tab-tema-layout">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-swatchbook"></i> Preset Warna Tema (1-Klik)</div>
+            </div>
+            <div class="stats-grid" id="theme-presets-grid" style="grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));"></div>
+          </div>
+
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-paint-brush"></i> Kustomisasi Palet Warna</div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group-admin">
+                <label class="form-label-admin">Aksen Utama (Primary)</label>
+                <input type="color" id="theme-primary-color" style="width:100%; height:36px; border:none; border-radius:6px; cursor:pointer;">
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Teks Sekunder</label>
+                <input type="color" id="theme-secondary-color" style="width:100%; height:36px; border:none; border-radius:6px; cursor:pointer;">
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Latar Dasar (Background)</label>
+                <input type="color" id="theme-bg-base" style="width:100%; height:36px; border:none; border-radius:6px; cursor:pointer;">
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Aksen Highlight</label>
+                <input type="color" id="theme-accent-color" style="width:100%; height:36px; border:none; border-radius:6px; cursor:pointer;">
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-font"></i> Tipografi Font</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Font Judul Utama</label>
+              <select id="theme-font-title" class="form-select-admin">
+                <option value="'Playfair Display', serif">Playfair Display (Elegan Klasik)</option>
+                <option value="'Cinzel', serif">Cinzel (Mewah & Megah)</option>
+                <option value="'Cormorant Garamond', serif">Cormorant Garamond (Artistik)</option>
+                <option value="'Alata', sans-serif">Alata (Modern)</option>
+                <option value="'Montserrat', sans-serif">Montserrat (Bersih)</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Font Subheading / Header</label>
+              <select id="theme-font-heading" class="form-select-admin">
+                <option value="'Alata', sans-serif">Alata (Original)</option>
+                <option value="'DM Sans', sans-serif">DM Sans</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Font Teks Konten</label>
+              <select id="theme-font-body" class="form-select-admin">
+                <option value="'DM Sans', sans-serif">DM Sans</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Font Sambung / Script</label>
+              <select id="theme-font-script" class="form-select-admin">
+                <option value="'Alex Brush', cursive">Alex Brush (Kaligrafi Halus)</option>
+                <option value="'Great Vibes', cursive">Great Vibes (Romantis)</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Custom CSS</label>
+              <textarea id="custom-css-code" class="form-textarea-admin" rows="2" placeholder="/* CSS kustom */"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: ON/OFF BAGIAN -->
+        <div class="tab-pane" id="tab-sections-toggle">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-toggle-on"></i> On / Off Bagian Undangan</div>
+            </div>
+            <div id="section-toggles-list"></div>
+          </div>
+        </div>
+
+        <!-- TAB: MEMPELAI & INFO -->
+        <div class="tab-pane" id="tab-mempelai">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-heading"></i> Info Cover & Judul</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Judul Tab Halaman</label>
+              <input type="text" id="site-title" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Singkat Pasangan</label>
+              <input type="text" id="couple-name-short" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Teks Pembuka Cover (Dear / Kepada Yth.)</label>
+              <input type="text" id="cover-to-prefix" class="form-input-admin">
+            </div>
+          </div>
+
+          <!-- Groom -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-male"></i> Pengantin Pria (Groom)</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Foto Avatar Pria</label>
+              <div class="image-uploader-box">
+                <img id="groom-photo-preview" src="" class="image-preview-thumb" style="border-radius:50%;">
+                <div class="image-upload-actions">
+                  <input type="text" id="groom-photo" class="form-input-admin" placeholder="URL Foto Pria">
+                  <input type="file" id="groom-photo-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                </div>
+              </div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Lengkap & Gelar</label>
+              <input type="text" id="groom-fullname" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Orang Tua</label>
+              <input type="text" id="groom-parents" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Instagram</label>
+              <input type="text" id="groom-instagram" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Bio Singkat</label>
+              <input type="text" id="groom-about" class="form-input-admin">
+            </div>
+          </div>
+
+          <!-- Bride -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-female"></i> Pengantin Wanita (Bride)</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Foto Avatar Wanita</label>
+              <div class="image-uploader-box">
+                <img id="bride-photo-preview" src="" class="image-preview-thumb" style="border-radius:50%;">
+                <div class="image-upload-actions">
+                  <input type="text" id="bride-photo" class="form-input-admin" placeholder="URL Foto Wanita">
+                  <input type="file" id="bride-photo-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                </div>
+              </div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Lengkap & Gelar</label>
+              <input type="text" id="bride-fullname" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Orang Tua</label>
+              <input type="text" id="bride-parents" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Instagram</label>
+              <input type="text" id="bride-instagram" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Bio Singkat</label>
+              <input type="text" id="bride-about" class="form-input-admin">
+            </div>
+          </div>
+
+          <!-- Quotes -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-quote-left"></i> Kutipan / Ayat</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Isi Ayat</label>
+              <textarea id="quote-text-admin" class="form-textarea-admin" rows="3"></textarea>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Sumber Ayat</label>
+              <input type="text" id="quote-source-admin" class="form-input-admin">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: LOVE STORY -->
+        <div class="tab-pane" id="tab-story">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-history"></i> Kisah Cinta</div>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-add-story-milestone">
+                <i class="fas fa-plus"></i> Tambah Momen
+              </button>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Judul Section</label>
+              <input type="text" id="story-section-title" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Subtitle Section</label>
+              <input type="text" id="story-section-subtitle" class="form-input-admin">
+            </div>
+            <div id="story-milestones-list"></div>
+          </div>
+        </div>
+
+        <!-- TAB: WAKTU & LOKASI -->
+        <div class="tab-pane" id="tab-acara">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-stopwatch"></i> Target Countdown</div>
+            </div>
+            <div class="form-group-admin">
+              <input type="datetime-local" id="countdown-date" class="form-input-admin">
+            </div>
+          </div>
+
+          <!-- Akad -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-ring"></i> Akad Nikah</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Judul Sesi</label>
+              <input type="text" id="akad-title" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Hari & Tanggal</label>
+              <input type="text" id="akad-date-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Waktu</label>
+              <input type="text" id="akad-time-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Tempat</label>
+              <input type="text" id="akad-venue-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Alamat Lengkap</label>
+              <input type="text" id="akad-address-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Link Google Maps</label>
+              <input type="text" id="akad-maps" class="form-input-admin">
+            </div>
+          </div>
+
+          <!-- Resepsi -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-glass-cheers"></i> Resepsi Pernikahan</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Judul Sesi</label>
+              <input type="text" id="resepsi-title" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Hari & Tanggal</label>
+              <input type="text" id="resepsi-date-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Waktu</label>
+              <input type="text" id="resepsi-time-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Tempat</label>
+              <input type="text" id="resepsi-venue-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Alamat Lengkap</label>
+              <input type="text" id="resepsi-address-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Link Google Maps</label>
+              <input type="text" id="resepsi-maps" class="form-input-admin">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: STREAMING -->
+        <div class="tab-pane" id="tab-streaming">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-video"></i> Live Streaming</div>
+            </div>
+            <div class="form-group-admin" style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+              <input type="checkbox" id="streaming-enable" style="width:18px; height:18px;">
+              <label for="streaming-enable" class="form-label-admin" style="margin-bottom:0;">Aktifkan Live Streaming</label>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">URL Video YouTube</label>
+              <input type="text" id="streaming-yt-url" class="form-input-admin" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">URL Embed YouTube</label>
+              <input type="text" id="streaming-embed-url" class="form-input-admin" placeholder="https://www.youtube.com/embed/...">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: MEDIA & GALERI -->
+        <div class="tab-pane" id="tab-media">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-image"></i> Foto Cover & 5 Kartu Hero</div>
+            </div>
+            
+            <!-- Cover -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Foto Cover Pembuka</label>
+              <div class="image-uploader-box">
+                <img id="cover-image-admin-preview" src="" class="image-preview-thumb">
+                <div class="image-upload-actions">
+                  <input type="text" id="cover-image-admin" class="form-input-admin">
+                  <input type="file" id="cover-image-admin-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero 5 Cards Stack -->
+            <div class="form-group-admin">
+              <label class="form-label-admin">Foto Kartu 1 (Photostrip & QS. Ar-Rum: 21)</label>
+              <div class="image-uploader-box">
+                <img id="hero-main-image-preview" src="" class="image-preview-thumb">
+                <div class="image-upload-actions">
+                  <input type="text" id="hero-main-image" class="form-input-admin" placeholder="URL Kartu 1">
+                  <input type="file" id="hero-main-image-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group-admin">
+                <label class="form-label-admin">Foto Kartu 2 (GETTING MARRIED)</label>
+                <div class="image-uploader-box">
+                  <img id="hero-couple-1-preview" src="" class="image-preview-thumb">
+                  <div class="image-upload-actions">
+                    <input type="text" id="hero-couple-1" class="form-input-admin" placeholder="URL Kartu 2">
+                    <input type="file" id="hero-couple-1-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Foto Kartu 3 (Mempelai Wanita)</label>
+                <div class="image-uploader-box">
+                  <img id="hero-couple-2-preview" src="" class="image-preview-thumb">
+                  <div class="image-upload-actions">
+                    <input type="text" id="hero-couple-2" class="form-input-admin" placeholder="URL Kartu 3">
+                    <input type="file" id="hero-couple-2-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Foto Kartu 4 (Mempelai Pria)</label>
+                <div class="image-uploader-box">
+                  <img id="hero-couple-3-preview" src="" class="image-preview-thumb">
+                  <div class="image-upload-actions">
+                    <input type="text" id="hero-couple-3" class="form-input-admin" placeholder="URL Kartu 4">
+                    <input type="file" id="hero-couple-3-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group-admin">
+                <label class="form-label-admin">Foto Kartu 5 (Love Story)</label>
+                <div class="image-uploader-box">
+                  <img id="hero-couple-4-preview" src="" class="image-preview-thumb">
+                  <div class="image-upload-actions">
+                    <input type="text" id="hero-couple-4" class="form-input-admin" placeholder="URL Kartu 5">
+                    <input type="file" id="hero-couple-4-file" accept="image/*" class="form-input-admin" style="padding:2px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gallery Manager -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-images"></i> Manajemen Foto Galeri</div>
+            </div>
+            <div style="background:#141720; padding:10px; border-radius:8px; margin-bottom:12px;">
+              <input type="text" id="new-gallery-photo-url" class="form-input-admin" placeholder="URL Foto Gambar" style="margin-bottom:6px;">
+              <input type="file" id="new-gallery-photo-file" accept="image/*" class="form-input-admin" style="padding:2px; margin-bottom:6px;">
+              <input type="text" id="new-gallery-photo-caption" class="form-input-admin" placeholder="Keterangan / Caption Foto" style="margin-bottom:6px;">
+              <button type="button" class="admin-btn btn-primary btn-sm" id="btn-add-gallery-photo">
+                <i class="fas fa-plus"></i> Tambah ke Galeri
+              </button>
+            </div>
+            <div class="gallery-manager-grid" id="gallery-manager-grid"></div>
+          </div>
+        </div>
+
+        <!-- TAB: MUSIK LATAR -->
+        <div class="tab-pane" id="tab-audio">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-music"></i> Pengaturan Musik Latar</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">URL File Audio (MP3)</label>
+              <div style="display:flex; gap:8px;">
+                <input type="text" id="audio-url" class="form-input-admin" placeholder="assets/audio/wedding-song.mp3">
+                <button type="button" class="admin-btn btn-secondary" id="btn-admin-preview-audio">
+                  <i class="fas fa-play"></i> Tes Lagu
+                </button>
+              </div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Unggah File Audio Sendiri (MP3)</label>
+              <input type="file" id="audio-file" accept="audio/*" class="form-input-admin" style="padding:2px;">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Judul Musik</label>
+              <input type="text" id="audio-title" class="form-input-admin">
+            </div>
+            <div class="form-group-admin" style="display:flex; align-items:center; gap:8px;">
+              <input type="checkbox" id="audio-autoplay" style="width:18px; height:18px;">
+              <label for="audio-autoplay" class="form-label-admin" style="margin-bottom:0;">Putar otomatis saat cover dibuka</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: DRESS CODE -->
+        <div class="tab-pane" id="tab-dresscode">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-tshirt"></i> Panduan Dress Code</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Deskripsi Berbusana</label>
+              <textarea id="dresscode-desc" class="form-textarea-admin" rows="3"></textarea>
+            </div>
+            <div style="margin-top:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <label class="form-label-admin" style="margin:0;">Palet Warna Busana</label>
+                <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-add-dress-color"><i class="fas fa-plus"></i> Tambah</button>
+              </div>
+              <div id="dresscode-colors-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: REKENING & AMPLOP -->
+        <div class="tab-pane" id="tab-rekening">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-credit-card"></i> Rekening Bank & E-Wallet</div>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-add-bank"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div id="banks-manager-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-box-open"></i> Kado Fisik</div>
+            </div>
+            <div class="form-group-admin" style="display:flex; align-items:center; gap:8px;">
+              <input type="checkbox" id="phys-gift-enable" style="width:18px; height:18px;">
+              <label for="phys-gift-enable" class="form-label-admin" style="margin-bottom:0;">Aktifkan Alamat Kado Fisik</label>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Penerima</label>
+              <input type="text" id="phys-recipient-name-admin" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">No Telp</label>
+              <input type="text" id="phys-phone" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Alamat Pengiriman</label>
+              <textarea id="phys-address-admin" class="form-textarea-admin" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: TURUT MENGUNDANG & PROKES -->
+        <div class="tab-pane" id="tab-turut-prokes">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-users"></i> Turut Mengundang</div>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-add-turut-mengundang"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div id="turut-mengundang-manager-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-shield-virus"></i> Protokol Kesehatan</div>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-add-prokes"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div id="prokes-manager-list"></div>
+          </div>
+        </div>
+
+        <!-- TAB: DATABASE TAMU & LINK GENERATOR -->
+        <div class="tab-pane" id="tab-generator">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-user-plus"></i> Tambah Tamu (Generate Link Siap Buka)</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Tamu / Pasangan / Keluarga *</label>
+              <input type="text" id="new-guest-name" class="form-input-admin" placeholder="Contoh: Bpk. Hendra & Keluarga">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Kategori Tamu</label>
+              <select id="new-guest-category" class="form-select-admin">
+                <option value="Umum">Umum</option>
+                <option value="VIP">VIP</option>
+                <option value="Keluarga">Keluarga</option>
+                <option value="Sahabat">Sahabat</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Sesi Kehadiran</label>
+              <select id="new-guest-session" class="form-select-admin">
+                <option value="Sesi 1 (Akad & Resepsi)">Sesi 1 (Akad & Resepsi)</option>
+                <option value="Sesi 2 (Resepsi Sahabat)">Sesi 2 (Resepsi Sahabat)</option>
+                <option value="Full Event">Full Event</option>
+              </select>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nomor Meja</label>
+              <input type="text" id="new-guest-table" class="form-input-admin" placeholder="Meja VIP 01 / Meja 08">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">No WhatsApp (Opsional)</label>
+              <input type="text" id="new-guest-phone" class="form-input-admin" placeholder="081234567890">
+            </div>
+            <button type="button" class="admin-btn btn-primary" id="btn-add-new-guest">
+              <i class="fas fa-check-circle"></i> Tambah Tamu & Buat Link
+            </button>
+          </div>
+
+          <!-- Table of guests -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-list-check"></i> Database Tamu</div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Aksi Undangan</th>
+                    <th>Hapus</th>
+                  </tr>
+                </thead>
+                <tbody id="guest-database-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Bulk WA Generator -->
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fab fa-whatsapp"></i> Generator Massal (Bulk Paste)</div>
+            </div>
+            <div class="form-group-admin">
+              <textarea id="wa-bulk-guests" class="form-textarea-admin" rows="3" placeholder="Nama Tamu 1&#10;Nama Tamu 2&#10;Keluarga Bpk Hendra"></textarea>
+            </div>
+            <button type="button" class="admin-btn btn-primary btn-sm" id="btn-generate-wa-links">
+              <i class="fas fa-magic"></i> Generate Semua Link Massal
+            </button>
+            <div style="margin-top:14px;" id="wa-links-results"></div>
+          </div>
+        </div>
+
+        <!-- TAB: BUKU TAMU & RSVP -->
+        <div class="tab-pane" id="tab-buku-tamu">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-envelope-open-text"></i> Moderasi Ucapan RSVP</div>
+              <button type="button" class="admin-btn btn-secondary btn-sm" id="btn-export-wishes-csv">
+                <i class="fas fa-file-csv"></i> Export CSV
+              </button>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama Tamu</th>
+                    <th>Status</th>
+                    <th>Ucapan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="wishes-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: BACKUP & RESTORE -->
+        <div class="tab-pane" id="tab-backup-restore">
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-copyright"></i> Watermark Brand</div>
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">Nama Brand</label>
+              <input type="text" id="brand-name" class="form-input-admin">
+            </div>
+            <div class="form-group-admin">
+              <label class="form-label-admin">URL Brand</label>
+              <input type="text" id="brand-url" class="form-input-admin">
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="card-title-row">
+              <div class="card-title"><i class="fas fa-database"></i> Backup & Restore JSON</div>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="admin-btn btn-primary btn-sm" id="btn-export-json">
+                <i class="fas fa-download"></i> Unduh JSON
+              </button>
+              <label class="admin-btn btn-secondary btn-sm" style="cursor:pointer; margin-bottom:0;">
+                <i class="fas fa-upload"></i> Pulihkan JSON
+                <input type="file" id="file-import-json" accept=".json" style="display:none;">
+              </label>
+              <button type="button" class="admin-btn btn-danger btn-sm" id="btn-reset-default">
+                <i class="fas fa-history"></i> Reset Default
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data-store.js"></script>
+  <script src="js/particles-engine.js"></script>
+  <script src="js/invitation.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
