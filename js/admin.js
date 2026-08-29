@@ -475,16 +475,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setVal(id, val) {
-    const els = document.querySelectorAll(`#${id}`);
-    els.forEach(el => {
-      if (val !== undefined) el.value = val;
-    });
+    if (val === undefined || val === null) return;
+    const inputs = document.querySelectorAll(`input#${id}, textarea#${id}, select#${id}, input#${id}-admin, textarea#${id}-admin, select#${id}-admin`);
+    if (inputs.length > 0) {
+      inputs.forEach(el => {
+        el.value = val;
+      });
+    } else {
+      const anyEls = document.querySelectorAll(`#${id}, #${id}-admin`);
+      anyEls.forEach(el => {
+        if (el.value !== undefined) el.value = val;
+      });
+    }
   }
 
   function getVal(id, fallbackVal = '') {
-    const el = document.getElementById(id) || document.getElementById(id + '-admin');
-    if (!el) return fallbackVal;
-    const v = el.value !== undefined ? el.value.trim() : '';
+    // 1. Prioritize form controls (input, textarea, select) by exact id
+    let el = document.querySelector(`input#${id}, textarea#${id}, select#${id}`);
+    // 2. If not found, check form controls by id with -admin suffix (drawer)
+    if (!el) {
+      el = document.querySelector(`input#${id}-admin, textarea#${id}-admin, select#${id}-admin`);
+    }
+    // 3. Fallback to any element with .value property
+    if (!el) {
+      const anyEl = document.getElementById(id) || document.getElementById(id + '-admin');
+      if (anyEl && anyEl.value !== undefined) el = anyEl;
+    }
+    if (!el || el.value === undefined) return fallbackVal;
+    const v = el.value.trim();
     return v !== '' ? v : fallbackVal;
   }
 

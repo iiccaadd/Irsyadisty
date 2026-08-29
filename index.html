@@ -419,13 +419,15 @@
        5. FULLSCREEN LIGHTBOX MODAL
        =================================================================== -->
   <div class="lightbox-modal" id="lightbox-modal">
-    <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
-    <button class="lightbox-prev" id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
-    <button class="lightbox-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
-    <div class="lightbox-img-wrapper">
+    <button class="lightbox-close" id="lightbox-close" title="Tutup"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" id="lightbox-prev" title="Foto Sebelumnya"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-next" id="lightbox-next" title="Foto Selanjutnya"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-counter" id="lightbox-counter">1 / 6</div>
+    <div class="lightbox-img-wrapper" id="lightbox-img-wrapper">
       <img src="" alt="Zoomed Foto" class="lightbox-img" id="lightbox-img">
       <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
+    <div class="lightbox-swipe-hint"><i class="fas fa-arrows-alt-h"></i> Geser untuk melihat foto lain</div>
   </div>
 
   <!-- ===================================================================

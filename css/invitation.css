@@ -1073,61 +1073,127 @@ body {
   transform: scale(1.08);
 }
 
-/* Lightbox Modal */
+/* Lightbox Modal with Touch Swipe & Smooth Slide */
 .lightbox-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 99999;
   display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  user-select: none;
+  touch-action: none;
 }
 
 .lightbox-modal.active {
   display: flex;
+  opacity: 1;
+}
+
+.lightbox-counter {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: rgba(20, 23, 32, 0.75);
+  color: var(--accent-gold, #d4af37);
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 .lightbox-img-wrapper {
-  max-width: 90vw;
-  max-height: 80vh;
+  max-width: 92vw;
+  max-height: 78vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 .lightbox-img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  max-width: 90vw;
+  max-height: 74vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+  will-change: transform, opacity;
+}
+
+.lightbox-img.slide-out-left {
+  transform: translateX(-60px) scale(0.95);
+  opacity: 0;
+}
+
+.lightbox-img.slide-out-right {
+  transform: translateX(60px) scale(0.95);
+  opacity: 0;
+}
+
+.lightbox-img.slide-in-left {
+  animation: slideInFromLeft 0.28s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.lightbox-img.slide-in-right {
+  animation: slideInFromRight 0.28s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-60px) scale(0.95); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(60px) scale(0.95); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
 }
 
 .lightbox-close,
 .lightbox-prev,
 .lightbox-next {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  width: 44px;
-  height: 44px;
+  background: rgba(20, 23, 32, 0.7);
+  color: #fff;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
-  transition: background 0.3s;
-  backdrop-filter: blur(5px);
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10;
 }
 
 .lightbox-close:hover,
 .lightbox-prev:hover,
 .lightbox-next:hover {
-  background: var(--primary-color);
-  color: black;
+  background: var(--accent-gold, #d4af37);
+  color: #0b0c10;
+  border-color: var(--accent-gold, #d4af37);
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
 }
 
 .lightbox-close {
@@ -1151,9 +1217,38 @@ body {
 }
 
 .lightbox-caption {
-  color: #ccc;
-  margin-top: 15px;
+  color: #e5e5e5;
+  margin-top: 14px;
   font-size: 14px;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.3px;
+  max-width: 85vw;
+}
+
+.lightbox-swipe-hint {
+  position: absolute;
+  bottom: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  animation: pulseHint 2.5s infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.85; }
+}
+
+@media (max-width: 600px) {
+  .lightbox-prev { left: 10px; width: 40px; height: 40px; font-size: 15px; }
+  .lightbox-next { right: 10px; width: 40px; height: 40px; font-size: 15px; }
+  .lightbox-close { top: 16px; right: 16px; width: 40px; height: 40px; }
+  .lightbox-counter { top: 16px; left: 16px; font-size: 11px; padding: 4px 10px; }
 }
 
 /* ===================================================================
