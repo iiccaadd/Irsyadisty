@@ -13,9 +13,9 @@ const DEFAULT_INVITATION_DATA = {
     siteTitle: "The Wedding of Irsyad & Adisty",
     coupleNameShort: "Irsyad & Adisty",
     groom: {
-      fullName: "Irsyad",
+      fullName: "Muhammad Irsyad",
       nickname: "Irsyad",
-      parents: "Putra Tercinta dari Bpk. & Ibu",
+      parents: "Putra dari Bpk. Mulyadi (Alm) & Ibu Nonoy Suryani",
       photo: "assets/images/hero-couple-1.jpg",
       instagram: "https://instagram.com",
       about: "The handsome groom who found his true soulmate."
@@ -23,7 +23,7 @@ const DEFAULT_INVITATION_DATA = {
     bride: {
       fullName: "Adisty",
       nickname: "Adisty",
-      parents: "Putri Tercinta dari Bpk. & Ibu",
+      parents: "Putri dari Bpk. & Ibu",
       photo: "assets/images/hero-couple-2.jpg",
       instagram: "https://instagram.com",
       about: "The lovely bride who completes this beautiful journey."

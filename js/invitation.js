@@ -331,8 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (groomNameEl) groomNameEl.textContent = data.general.groom.fullName;
     const groomHeaderName = document.getElementById('groom-header-name');
     if (groomHeaderName) groomHeaderName.textContent = data.general.groom.fullName || data.general.groom.nickname || 'Irsyad';
-    const groomParentsEl = document.getElementById('groom-parents');
-    if (groomParentsEl) groomParentsEl.textContent = data.general.groom.parents;
+    const groomParentsEl = document.getElementById('groom-parents-display') || document.getElementById('groom-parents');
+    if (groomParentsEl) groomParentsEl.textContent = data.general.groom.parents || '';
     const groomAboutEl = document.getElementById('groom-about');
     if (groomAboutEl) {
       groomAboutEl.textContent = data.general.groom.about || '';
@@ -345,15 +345,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const groomInstaEl = document.getElementById('groom-insta');
     if (groomInstaEl && data.general.groom.instagram) {
       groomInstaEl.href = data.general.groom.instagram;
-      groomInstaEl.textContent = '@' + data.general.groom.nickname.toLowerCase();
+      groomInstaEl.textContent = '@' + (data.general.groom.nickname || 'irsyad').toLowerCase();
     }
 
     const brideNameEl = document.getElementById('bride-name');
     if (brideNameEl) brideNameEl.textContent = data.general.bride.fullName;
     const brideHeaderName = document.getElementById('bride-header-name');
     if (brideHeaderName) brideHeaderName.textContent = data.general.bride.fullName || data.general.bride.nickname || 'Adisty';
-    const brideParentsEl = document.getElementById('bride-parents');
-    if (brideParentsEl) brideParentsEl.textContent = data.general.bride.parents;
+    const brideParentsEl = document.getElementById('bride-parents-display') || document.getElementById('bride-parents');
+    if (brideParentsEl) brideParentsEl.textContent = data.general.bride.parents || '';
     const brideAboutEl = document.getElementById('bride-about');
     if (brideAboutEl) {
       brideAboutEl.textContent = data.general.bride.about || '';
