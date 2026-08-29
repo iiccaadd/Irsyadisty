@@ -488,6 +488,42 @@ document.addEventListener('DOMContentLoaded', () => {
     return v !== '' ? v : fallbackVal;
   }
 
+  function compressImage(file, maxDimension = 1080, quality = 0.85) {
+    return new Promise((resolve) => {
+      if (!file || !file.type.startsWith('image/')) {
+        return resolve(null);
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+          if (width > maxDimension || height > maxDimension) {
+            if (width > height) {
+              height = Math.round((height * maxDimension) / width);
+              width = maxDimension;
+            } else {
+              width = Math.round((width * maxDimension) / height);
+              height = maxDimension;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressed = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressed);
+        };
+        img.onerror = () => resolve(e.target.result);
+        img.src = e.target.result;
+      };
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
   function bindImageField(fieldId, initialUrl) {
     const urlInputs = document.querySelectorAll(`#${fieldId}`);
     const fileInputs = document.querySelectorAll(`#${fieldId}-file`);
@@ -506,17 +542,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     fileInputs.forEach(fileInput => {
-      fileInput.addEventListener('change', (e) => {
+      fileInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (file) {
-          const reader = new FileReader();
-          reader.onload = (re) => {
-            const base64Url = re.target.result;
-            urlInputs.forEach(ui => ui.value = base64Url);
-            previews.forEach(p => p.src = base64Url);
+          showAdminToast('Mengompresi & menyiapkan foto...');
+          const compressedBase64 = await compressImage(file, 1080, 0.85);
+          if (compressedBase64) {
+            urlInputs.forEach(ui => ui.value = compressedBase64);
+            previews.forEach(p => p.src = compressedBase64);
             saveAllFormData(false);
-          };
-          reader.readAsDataURL(file);
+            showAdminToast('Foto berhasil diunggah!');
+          }
         }
       });
     });

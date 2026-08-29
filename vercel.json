@@ -1,21 +1,8 @@
 {
   "version": 2,
-  "name": "undangan-irsyad-adisty",
-  "builds": [
-    {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "headers": [
     {
-      "source": "/(.*\\.html|/)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -32,20 +19,11 @@
       ]
     },
     {
-      "source": "/(css|js)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, must-revalidate, max-age=0"
-        }
-      ]
-    },
-    {
       "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "value": "no-cache, must-revalidate, max-age=0"
         }
       ]
     }

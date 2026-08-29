@@ -349,6 +349,7 @@ const DataStore = {
    */
   save(data) {
     try {
+      if (!data.lastModified) data.lastModified = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       
       // 1. Same-window CustomEvent
@@ -385,6 +386,9 @@ const DataStore = {
         }
       } catch(winErr) {}
 
+      // 5. Cloud Sync push to /api/sync
+      this.syncToCloud(data);
+
       return true;
     } catch (e) {
       console.error('Error saving DataStore', e);
@@ -393,9 +397,44 @@ const DataStore = {
   },
 
   /**
-   * Load remote data.json file from server (for first-time guests on any device)
+   * Push data payload asynchronously to cloud sync API
+   */
+  async syncToCloud(data) {
+    try {
+      await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      // Offline / local fallback
+    }
+  },
+
+  /**
+   * Load remote data from /api/sync or data.json (for guests on any phone / device)
    */
   async loadRemoteData() {
+    // 1. Try /api/sync first
+    try {
+      const apiRes = await fetch('/api/sync?v=' + Date.now(), { cache: 'no-store' });
+      if (apiRes.ok) {
+        const cloudResult = await apiRes.json();
+        if (cloudResult && cloudResult.data && cloudResult.data.general) {
+          const cloudData = cloudResult.data;
+          const localData = this.get();
+          // If cloud data is newer or local is default, apply cloud data!
+          if (!localData.lastModified || (cloudData.lastModified && cloudData.lastModified >= localData.lastModified)) {
+            const merged = this._deepMerge(JSON.parse(JSON.stringify(DEFAULT_INVITATION_DATA)), cloudData);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+            window.dispatchEvent(new CustomEvent('invitationDataUpdated', { detail: merged }));
+            return merged;
+          }
+        }
+      }
+    } catch (apiErr) {}
+
+    // 2. Fallback to data.json
     try {
       const response = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
       if (response.ok) {
