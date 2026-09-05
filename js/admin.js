@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const unifiedDrawer = document.getElementById('unified-admin-drawer');
   const iframePreview = document.getElementById('preview-iframe');
 
+  const AUTH_STORAGE_KEY = 'wedding_admin_auth_session';
+  const VALID_USER = 'irsyadisty';
+  const VALID_PASS = '11nov2026';
+
   // Initialize UI & Populate All Forms safely
   try {
     initAdminAuth();
@@ -78,10 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
      - Username: irsyadisty
      - Password: 11nov2026
      =================================================================== */
-  const AUTH_STORAGE_KEY = 'wedding_admin_auth_session';
-  const VALID_USER = 'irsyadisty';
-  const VALID_PASS = '11nov2026';
-
   function isUserAuthenticated() {
     return sessionStorage.getItem(AUTH_STORAGE_KEY) === 'authenticated_irsyadisty';
   }

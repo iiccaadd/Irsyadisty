@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeLightboxIndex = 0;
   let selectedSticker = 'assets/stickers/sticker001.gif';
   let selectedPresence = 'hadir';
+  let currentGalleryList = [];
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let lightboxInitialized = false;
 
   // Read URL query parameters robustly (?to=...&kategori=...&sesi=...&meja=...)
   const guestParams = parseGuestUrlParams(appData);
@@ -824,13 +830,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===================================================================
      LIGHTBOX / SLIDER MODAL WITH TOUCH SWIPE & KEYBOARD SUPPORT
      =================================================================== */
-  let currentGalleryList = [];
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchEndX = 0;
-  let touchEndY = 0;
-  let lightboxInitialized = false;
-
   function initLightbox(data) {
     const modal = document.getElementById('lightbox-modal');
     const closeBtn = document.getElementById('lightbox-close');
