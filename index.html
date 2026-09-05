@@ -13,9 +13,14 @@
   <link rel="shortcut icon" href="assets/images/cover.jpg" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Google Fonts - Sora (Royal) Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Alata&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <!-- CSS Stylesheets with Cache-Busting Versioning -->
-  <link rel="stylesheet" href="css/invitation.css?v=20260905.1">
-  <link rel="stylesheet" href="css/admin.css?v=20260905.1">
+  <link rel="stylesheet" href="css/invitation.css?v=20260905.2">
+  <link rel="stylesheet" href="css/admin.css?v=20260905.2">
 </head>
 <body>
 
@@ -67,6 +72,43 @@
 
   <!-- Fixed background backdrop -->
   <div id="infuwr"></div>
+
+  <!-- ===================================================================
+       2.5 SORA ROYAL DESKTOP FIXED HERO (Split-Screen Anchor)
+       Clean luxury layout matching Sora (Royal) aesthetic
+       =================================================================== -->
+  <aside class="royal-desktop-hero" id="royal-desktop-hero">
+    <div class="royal-hero-overlay"></div>
+    <div class="royal-hero-content">
+      <div class="royal-hero-top">
+        <div class="royal-badge-gold">
+          <i class="fas fa-crown"></i>
+          <span>THE WEDDING CELEBRATION</span>
+        </div>
+        <h1 class="royal-hero-names" id="royal-hero-names">Irsyad & Adisty</h1>
+        <div class="royal-hero-date-badge" id="royal-hero-date">
+          <i class="far fa-calendar-alt"></i> Selasa, 18 Mei 2027
+        </div>
+      </div>
+
+      <div class="royal-hero-bottom">
+        <div class="royal-quote-box">
+          <i class="fas fa-quote-left royal-quote-icon"></i>
+          <p class="royal-quote-text" id="royal-hero-quote">
+            “And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.”
+          </p>
+          <span class="royal-quote-surah" id="royal-hero-quote-source">QS. Ar-Rum : 21</span>
+        </div>
+        <div class="royal-soundwave-indicator">
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <span class="soundwave-text">The Wedding of Irsyad & Adisty</span>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- ===================================================================
        3. MAIN INVITATION CONTENT
@@ -709,6 +751,7 @@
             <div class="form-group-admin">
               <label class="form-label-admin">Font Subheading / Header</label>
               <select id="theme-font-heading" class="form-select-admin">
+                <option value="'Cinzel', serif">Cinzel (Royal Sora)</option>
                 <option value="'Alata', sans-serif">Alata (Original)</option>
                 <option value="'DM Sans', sans-serif">DM Sans</option>
                 <option value="'Montserrat', sans-serif">Montserrat</option>
@@ -718,6 +761,7 @@
             <div class="form-group-admin">
               <label class="form-label-admin">Font Teks Konten</label>
               <select id="theme-font-body" class="form-select-admin">
+                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans (Royal Sora)</option>
                 <option value="'DM Sans', sans-serif">DM Sans</option>
                 <option value="'Poppins', sans-serif">Poppins</option>
                 <option value="'Montserrat', sans-serif">Montserrat</option>
@@ -1348,10 +1392,10 @@
   </div>
 
   <!-- Scripts with Cache-Busting Versioning -->
-  <script src="js/data-store.js?v=20260905.1"></script>
-  <script src="js/particles-engine.js?v=20260905.1"></script>
-  <script src="js/invitation.js?v=20260905.1"></script>
-  <script src="js/admin.js?v=20260905.1"></script>
+  <script src="js/data-store.js?v=20260905.2"></script>
+  <script src="js/particles-engine.js?v=20260905.2"></script>
+  <script src="js/invitation.js?v=20260905.2"></script>
+  <script src="js/admin.js?v=20260905.2"></script>
 </body>
 </html>
 

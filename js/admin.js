@@ -656,6 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
      =================================================================== */
   function renderThemePresets() {
     const presets = [
+      { id: "sora-royal", name: "Sora Royal (Luxury)", primary: "#F1C193", secondary: "#ffffff", bg: "#0b0f19", card: "rgba(15, 20, 34, 0.85)" },
       { id: "luxury-gold", name: "Luxury Gold", primary: "#d4af37", secondary: "#f3f0eb", bg: "#0a0a0a", card: "rgba(20, 20, 20, 0.85)" },
       { id: "rose-gold", name: "Rose Gold", primary: "#e8a598", secondary: "#fff0ed", bg: "#140d12", card: "rgba(30, 16, 24, 0.85)" },
       { id: "emerald-luxury", name: "Emerald", primary: "#2ecc71", secondary: "#e8f8f0", bg: "#06170f", card: "rgba(10, 32, 22, 0.85)" },
@@ -679,6 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.applyThemePreset = function(presetId) {
     const presetMap = {
+      "sora-royal": { primary: "#F1C193", secondary: "#ffffff", accent: "#c29b75", bg: "#0b0f19", card: "rgba(15, 20, 34, 0.85)", titleFont: "'Cinzel', serif", headingFont: "'Cinzel', serif", bodyFont: "'Plus Jakarta Sans', sans-serif" },
       "luxury-gold": { primary: "#d4af37", secondary: "#f3f0eb", accent: "#e5c158", bg: "#0a0a0a", card: "rgba(20, 20, 20, 0.85)" },
       "rose-gold": { primary: "#e8a598", secondary: "#fff0ed", accent: "#fbcfe8", bg: "#140d12", card: "rgba(30, 16, 24, 0.85)" },
       "emerald-luxury": { primary: "#2ecc71", secondary: "#e8f8f0", accent: "#a7f3d0", bg: "#06170f", card: "rgba(10, 32, 22, 0.85)" },
@@ -694,6 +696,9 @@ document.addEventListener('DOMContentLoaded', () => {
       setVal('theme-accent-color', p.accent);
       setVal('theme-bg-base', p.bg);
       setVal('theme-card-bg', p.card);
+      if (p.titleFont) setVal('theme-font-title', p.titleFont);
+      if (p.headingFont) setVal('theme-font-heading', p.headingFont);
+      if (p.bodyFont) setVal('theme-font-body', p.bodyFont);
       saveAllFormData(false);
       showAdminToast(`Tema ${presetId} diterapkan seketika! ✨`);
     }

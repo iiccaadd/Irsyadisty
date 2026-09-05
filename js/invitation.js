@@ -320,6 +320,29 @@ document.addEventListener('DOMContentLoaded', () => {
       coverMetaEl.innerHTML = metaHtml;
     }
 
+    // Sora (Royal) Desktop Hero Banner Bindings
+    const royalHero = document.getElementById('royal-desktop-hero');
+    if (royalHero && data.media) {
+      const heroBg = data.media.coverImage || data.media.heroCouple1 || 'assets/images/hero-couple-1.jpg';
+      royalHero.style.backgroundImage = `url('${heroBg}')`;
+    }
+    const royalNames = document.getElementById('royal-hero-names');
+    if (royalNames && data.general) {
+      royalNames.textContent = data.general.coupleNameShort || 'Irsyad & Adisty';
+    }
+    const royalDate = document.getElementById('royal-hero-date');
+    if (royalDate && data.event && data.event.akad) {
+      royalDate.innerHTML = `<i class="far fa-calendar-alt"></i> ${escapeHtml(data.event.akad.date || 'Selasa, 18 Mei 2027')}`;
+    }
+    const royalQuote = document.getElementById('royal-hero-quote');
+    if (royalQuote && data.general && data.general.quote) {
+      royalQuote.textContent = `“${data.general.quote.replace(/^[“"”]+|[“"”]+$/g, '')}”`;
+    }
+    const royalQuoteSrc = document.getElementById('royal-hero-quote-source');
+    if (royalQuoteSrc && data.general && data.general.quoteSource) {
+      royalQuoteSrc.textContent = data.general.quoteSource;
+    }
+
     // Toggle Section Visibility
     toggleSection('section-home', data.sections ? data.sections.hero : true);
     toggleSection('section-story', data.sections ? data.sections.story : true);
